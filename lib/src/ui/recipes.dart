@@ -18,8 +18,12 @@ class RecipesList extends StatelessWidget {
         stream: bloc.allRecipes,
         builder: (context, AsyncSnapshot<PagedList> snapshot) {
           if (snapshot.hasData) {
-            recipes = snapshot.data;
-            return buildList(snapshot);
+            if (recipes == null) {
+              recipes = snapshot.data;
+            } else {
+              recipes.items.addAll(snapshot.data.items);
+            }
+            return buildList(recipes);
           } else if (snapshot.hasError) {
             return Text(snapshot.error.toString());
           }
@@ -30,26 +34,27 @@ class RecipesList extends StatelessWidget {
     return scaffold;
   }
 
-  Widget buildList(AsyncSnapshot<PagedList> snapshot) {
+  Widget buildList(PagedList recipes) {
     var scrollController = ScrollController();
     scrollController.addListener(() {
       if (scrollController.position.maxScrollExtent ==
           scrollController.position.pixels) {
-        bloc.fetchAllRecipes(page: 2);
+        bloc.fetchAllRecipes(page: recipes.currentPage + 1);
       }
     });
 
     return ListView.builder(
       controller: scrollController,
-      itemCount: snapshot.data.items.length + 1,
+      itemCount: recipes.items.length + 1,
       itemBuilder: (context, index) {
-        if (index == snapshot.data.items.length &&
-            snapshot.data.currentPage < snapshot.data.totalPages) {
+        if (index == recipes.items.length &&
+            recipes.currentPage < recipes.totalPages) {
           return Center(
-            child: CircularProgressIndicator(),
-          );
+              child: Padding(
+                  padding: EdgeInsets.only(bottom: 15),
+                  child: CircularProgressIndicator()));
         } else {
-          var recipe = snapshot.data.items[index] as RecipeModel;
+          var recipe = recipes.items[index] as RecipeModel;
           return cardBox(recipe);
         }
       },

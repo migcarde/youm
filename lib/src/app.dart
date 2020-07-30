@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:youm/src/ui/recipes.dart';
 
-
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -24,7 +23,8 @@ class App extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Scaffold(body: RecipesList(),),
+      initialRoute: '/',
+      routes: {'/': (context) => Scaffold(body: RecipesList())},
     );
   }
 }

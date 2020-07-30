@@ -1,6 +1,13 @@
-# youm
+# Youm!
 
-A new Flutter project.
+Youm! Is a simple app that recommends to users diets based on their food taste and other paramets.
+
+In the first version of this project we will introduce four parameters that will be:
+
+- Calories.
+- Sodium.
+- Proteins.
+- Food to avoid.
 
 ## Getting Started
 
