@@ -55,54 +55,60 @@ class RecipesList extends StatelessWidget {
                   child: CircularProgressIndicator()));
         } else {
           var recipe = recipes.items[index] as RecipeModel;
-          return cardBox(recipe);
+          return cardBox(recipe, context);
         }
       },
     );
   }
 
-  Widget cardBox(RecipeModel recipe) {
-    return Container(
-        alignment: Alignment.centerLeft,
-        margin: EdgeInsets.all(10.0),
-        padding: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
-        decoration: BoxDecoration(
-            border: Border.all(color: Colors.blue, width: 1),
-            borderRadius: BorderRadius.circular(15.0)),
-        child: Row(children: <Widget>[
-          Padding(
-              padding: EdgeInsets.only(right: 10.0),
-              child: Container(
-                  width: 60,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.red),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Column(
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.only(top: 5),
-                        child: Image.asset(
-                          'assets/icons/fire.png',
-                          color: Colors.orange,
-                          width: 25,
-                        ),
+  Widget cardBox(RecipeModel recipe, BuildContext context) {
+    return InkWell(
+        onTap: () =>
+            {Navigator.pushNamed(context, '/recipes', arguments: recipe)},
+        highlightColor: Colors.transparent,
+        splashColor: Colors.transparent,
+        child: Container(
+            alignment: Alignment.centerLeft,
+            margin: EdgeInsets.all(10.0),
+            padding: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.blue, width: 1),
+                borderRadius: BorderRadius.circular(15.0)),
+            child: Row(children: <Widget>[
+              Padding(
+                  padding: EdgeInsets.only(right: 10.0),
+                  child: Container(
+                      width: 60,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.red),
+                        shape: BoxShape.circle,
                       ),
-                      Padding(
-                          padding: EdgeInsets.only(bottom: 5),
-                          child: Text(recipe.calories == 0
-                              ? '-'
-                              : recipe.calories.toString()))
-                    ],
-                  ))),
-          Expanded(
-              child: Container(
-                  alignment: Alignment.centerLeft,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: cardContent(recipe),
-                  )))
-        ]));
+                      child: Column(
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.only(top: 5),
+                            child: Image.asset(
+                              'assets/icons/fire.png',
+                              color: Colors.orange,
+                              width: 25,
+                            ),
+                          ),
+                          Padding(
+                              padding: EdgeInsets.only(bottom: 5),
+                              child: Text(recipe.calories == 0
+                                  ? '-'
+                                  : recipe.calories.toString()))
+                        ],
+                      ))),
+              Expanded(
+                child: Container(
+                    alignment: Alignment.centerLeft,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: cardContent(recipe),
+                    )),
+              )
+            ])));
   }
 
   List<Widget> cardContent(RecipeModel recipe) {

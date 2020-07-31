@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:youm/src/ui/recipeDetail.dart';
 import 'package:youm/src/ui/recipes.dart';
 
 class App extends StatelessWidget {
@@ -24,7 +25,10 @@ class App extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       initialRoute: '/',
-      routes: {'/': (context) => Scaffold(body: RecipesList())},
+      routes: {
+        '/': (context) => Scaffold(body: RecipesList()),
+        '/recipes': (context) => Scaffold(body: RecipeDetail())
+      },
     );
   }
 }
