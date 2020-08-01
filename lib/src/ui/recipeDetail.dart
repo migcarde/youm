@@ -14,23 +14,35 @@ class _RecipeDetailState extends State<RecipeDetail> {
   Widget build(BuildContext context) {
     final RecipeModel recipe = ModalRoute.of(context).settings.arguments;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(recipe.title),
-        actions: <Widget>[
-          IconButton(
-              icon: Icon(_favoriteIcon, color: Colors.red),
-              onPressed: () {
-                setState(() {
-                  _favoriteIcon = Icons.favorite;
-                });
-              })
-        ],
-      ),
-      body: Container(
-        alignment: Alignment.topLeft,
-        child: Text(recipe.description ?? ''),
-      ),
-    );
+    return DefaultTabController(
+        length: 2,
+        child: Scaffold(
+            appBar: AppBar(
+                title: Text(recipe.title),
+                actions: <Widget>[
+                  IconButton(
+                      icon: Icon(_favoriteIcon, color: Colors.red),
+                      onPressed: () {
+                        setState(() {
+                          _favoriteIcon = Icons.favorite;
+                        });
+                      })
+                ],
+                bottom: TabBar(tabs: [
+                  Tab(text: "Preparación"),
+                  Tab(text: "Ingredientes")
+                ])),
+            body: TabBarView(
+              children: <Widget>[
+                Container(
+                  alignment: Alignment.topLeft,
+                  child: Text(recipe.description ?? ''),
+                ),
+                Container(
+                  alignment: Alignment.topLeft,
+                  child: Text(recipe.title ?? ''),
+                ),
+              ],
+            )));
   }
 }
