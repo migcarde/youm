@@ -23,7 +23,7 @@ class RecipesList extends StatelessWidget {
             } else {
               recipes.items.addAll(snapshot.data.items);
             }
-            return buildList(recipes);
+            return buildPagedList(recipes);
           } else if (snapshot.hasError) {
             return Text(snapshot.error.toString());
           }
@@ -34,7 +34,7 @@ class RecipesList extends StatelessWidget {
     return scaffold;
   }
 
-  Widget buildList(PagedList recipes) {
+  Widget buildPagedList(PagedList recipes) {
     var scrollController = ScrollController();
     scrollController.addListener(() {
       if (scrollController.position.maxScrollExtent ==

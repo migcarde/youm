@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:youm/src/common/ui/ListBuilder.dart';
 import 'package:youm/src/models/recipeModel.dart';
 
 class RecipeDetail extends StatefulWidget {
@@ -34,14 +35,8 @@ class _RecipeDetailState extends State<RecipeDetail> {
                 ])),
             body: TabBarView(
               children: <Widget>[
-                Container(
-                  alignment: Alignment.topLeft,
-                  child: Text(recipe.description ?? ''),
-                ),
-                Container(
-                  alignment: Alignment.topLeft,
-                  child: Text(recipe.title ?? ''),
-                ),
+                buildListString(recipe.directions),
+                buildListString(recipe.ingredients),
               ],
             )));
   }
