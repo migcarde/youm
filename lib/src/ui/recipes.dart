@@ -69,90 +69,126 @@ class RecipesList extends StatelessWidget {
         splashColor: Colors.transparent,
         child: Container(
             alignment: Alignment.centerLeft,
-            margin: EdgeInsets.all(10.0),
-            padding: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
-            decoration: BoxDecoration(
-                border: Border.all(color: Colors.blue, width: 1),
-                borderRadius: BorderRadius.circular(15.0)),
-            child: Row(children: <Widget>[
-              Padding(
-                  padding: EdgeInsets.only(right: 10.0),
-                  child: Container(
-                      width: 60,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.red),
-                        shape: BoxShape.circle,
-                      ),
-                      child: Column(
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.only(top: 5),
-                            child: Image.asset(
-                              'assets/icons/fire.png',
-                              color: Colors.orange,
-                              width: 25,
-                            ),
-                          ),
-                          Padding(
-                              padding: EdgeInsets.only(bottom: 5),
-                              child: Text(recipe.calories == 0
-                                  ? '-'
-                                  : recipe.calories.toString()))
-                        ],
-                      ))),
+            margin: EdgeInsets.fromLTRB(10, 2, 10, 2),
+            child: Stack(alignment: Alignment.centerLeft, children: <Widget>[
+              Container(
+                  margin: EdgeInsets.only(left: 55, top: 60),
+                  padding: EdgeInsets.all(3),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: Colors.lightGreen, width: 1),
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10))),
+                  child: Text(
+                    "${recipe.sodium == 0 ? '-' : recipe.sodium} sod",
+                    style: TextStyle(color: Colors.black),
+                    textAlign: TextAlign.start,
+                  )),
+              Container(
+                alignment: Alignment.bottomRight,
+                child: Container(
+                    margin: EdgeInsets.only(right: 20, top: 60),
+                    padding: EdgeInsets.all(3),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: Colors.orange, width: 1),
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(10),
+                            bottomRight: Radius.circular(10))),
+                    child: Text(
+                      "${recipe.sodium == 0 ? '-' : recipe.proteins} pro",
+                      style: TextStyle(color: Colors.black),
+                      textAlign: TextAlign.start,
+                    )),
+              ),
               Expanded(
                 child: Container(
+                    margin: EdgeInsets.only(left: 30),
+                    padding: EdgeInsets.only(right: 10),
                     alignment: Alignment.centerLeft,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: Colors.blue, width: 1),
+                        borderRadius: BorderRadius.circular(15.0)),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: cardContent(recipe),
-                    )),
-              )
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                              padding: EdgeInsets.only(
+                                  left: 30, top: 10, bottom: 10),
+                              child: Text(
+                                recipe.title,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 18),
+                                textAlign: TextAlign.start,
+                              )),
+                        ])),
+              ),
+              Container(
+                  width: 60,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(color: Colors.red),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Column(
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.only(top: 5),
+                        child: Image.asset(
+                          'assets/icons/fire.png',
+                          color: Colors.orange,
+                          width: 25,
+                        ),
+                      ),
+                      Padding(
+                          padding: EdgeInsets.only(bottom: 5),
+                          child: Text(recipe.calories == 0
+                              ? '-'
+                              : recipe.calories.toString()))
+                    ],
+                  ))
             ])));
   }
 
   List<Widget> cardContent(RecipeModel recipe) {
     List<Widget> result = List<Widget>();
 
-    var title = Text(
-      recipe.title,
-      style: TextStyle(color: Colors.black, fontSize: 18),
-      textAlign: TextAlign.start,
-    );
-    result.add(title);
+    // if (recipe.description != null) {
+    //   var description = Padding(
+    //     padding: EdgeInsets.only(left: 10.0, top: 10.0),
+    //     child: Text(
+    //       recipe.description,
+    //       style: TextStyle(color: Colors.orange),
+    //       textAlign: TextAlign.start,
+    //       maxLines: 2,
+    //       overflow: TextOverflow.ellipsis,
+    //     ),
+    //   );
+    //   result.add(description);
+    // }
 
-    if (recipe.description != null) {
-      var description = Padding(
-        padding: EdgeInsets.only(left: 10.0, top: 10.0),
-        child: Text(
-          recipe.description,
-          style: TextStyle(color: Colors.orange),
-          textAlign: TextAlign.start,
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-        ),
-      );
-      result.add(description);
-    }
-
-    var rows = Padding(
-        padding: EdgeInsets.only(top: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Text(
-              "${recipe.proteins == 0 ? '-' : recipe.proteins} pro",
-              style: TextStyle(color: Colors.blue),
-              textAlign: TextAlign.start,
-            ),
-            Text(
-              "${recipe.sodium == 0 ? '-' : recipe.sodium} sod",
-              style: TextStyle(color: Colors.red),
-              textAlign: TextAlign.start,
-            )
-          ],
-        ));
-    result.add(rows);
+    // var rows = Padding(
+    //     padding: EdgeInsets.only(top: 10, left: 30),
+    //     child: Row(
+    //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //       children: <Widget>[
+    //         Text(
+    //           "${recipe.proteins == 0 ? '-' : recipe.proteins} pro",
+    //           style: TextStyle(color: Colors.blue),
+    //           textAlign: TextAlign.start,
+    //         ),
+    //         Text(
+    //           "${recipe.sodium == 0 ? '-' : recipe.sodium} sod",
+    //           style: TextStyle(color: Colors.red),
+    //           textAlign: TextAlign.start,
+    //         )
+    //       ],
+    //     ));
+    // result.add(rows);
 
     return result;
   }
