@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:youm/generated/l10n.dart';
+import 'package:youm/src/ui/recipeDetail.dart';
 import 'package:youm/src/ui/recipes.dart';
 
 class App extends StatelessWidget {
@@ -24,7 +27,17 @@ class App extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       initialRoute: '/',
-      routes: {'/': (context) => Scaffold(body: RecipesList())},
+      routes: {
+        '/': (context) => Scaffold(body: RecipesList()),
+        '/recipes': (context) => Scaffold(body: RecipeDetail())
+      },
+      localizationsDelegates: [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate
+      ],
+      supportedLocales: S.delegate.supportedLocales,
     );
   }
 }
