@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:youm/generated/l10n.dart';
 import 'package:youm/src/common/ui/ListBuilder.dart';
 import 'package:youm/src/models/recipeModel.dart';
 
@@ -30,8 +31,8 @@ class _RecipeDetailState extends State<RecipeDetail> {
                       })
                 ],
                 bottom: TabBar(tabs: [
-                  Tab(text: "Preparación"),
-                  Tab(text: "Ingredientes")
+                  Tab(text: S.of(context).preparation),
+                  Tab(text: S.of(context).ingredients)
                 ])),
             body: TabBarView(
               children: <Widget>[
