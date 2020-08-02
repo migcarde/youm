@@ -33,9 +33,6 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-<<<<<<< HEAD
-
-=======
   /// `Preparation`
   String get preparation {
     return Intl.message(
@@ -55,7 +52,6 @@ class S {
       args: [],
     );
   }
->>>>>>> features/3-internationalization
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
@@ -64,10 +60,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
-<<<<<<< HEAD
-=======
       Locale.fromSubtags(languageCode: 'es'),
->>>>>>> features/3-internationalization
     ];
   }
 
