@@ -102,31 +102,29 @@ class RecipesList extends StatelessWidget {
                       textAlign: TextAlign.start,
                     )),
               ),
-              Expanded(
-                child: Container(
-                    margin: EdgeInsets.only(left: 30),
-                    padding: EdgeInsets.only(right: 10),
-                    alignment: Alignment.centerLeft,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.blue, width: 1),
-                        borderRadius: BorderRadius.circular(15.0)),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Padding(
-                              padding: EdgeInsets.only(
-                                  left: 30, top: 10, bottom: 10),
-                              child: Text(
-                                recipe.title,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 18),
-                                textAlign: TextAlign.start,
-                              )),
-                        ])),
-              ),
+              Container(
+                  margin: EdgeInsets.only(left: 30),
+                  padding: EdgeInsets.only(right: 10),
+                  alignment: Alignment.centerLeft,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: Colors.blue, width: 1),
+                      borderRadius: BorderRadius.circular(15.0)),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                            padding:
+                                EdgeInsets.only(left: 30, top: 10, bottom: 10),
+                            child: Text(
+                              recipe.title,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 18),
+                              textAlign: TextAlign.start,
+                            )),
+                      ])),
               Container(
                   width: 60,
                   decoration: BoxDecoration(
@@ -152,44 +150,5 @@ class RecipesList extends StatelessWidget {
                     ],
                   ))
             ])));
-  }
-
-  List<Widget> cardContent(RecipeModel recipe) {
-    List<Widget> result = List<Widget>();
-
-    // if (recipe.description != null) {
-    //   var description = Padding(
-    //     padding: EdgeInsets.only(left: 10.0, top: 10.0),
-    //     child: Text(
-    //       recipe.description,
-    //       style: TextStyle(color: Colors.orange),
-    //       textAlign: TextAlign.start,
-    //       maxLines: 2,
-    //       overflow: TextOverflow.ellipsis,
-    //     ),
-    //   );
-    //   result.add(description);
-    // }
-
-    // var rows = Padding(
-    //     padding: EdgeInsets.only(top: 10, left: 30),
-    //     child: Row(
-    //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //       children: <Widget>[
-    //         Text(
-    //           "${recipe.proteins == 0 ? '-' : recipe.proteins} pro",
-    //           style: TextStyle(color: Colors.blue),
-    //           textAlign: TextAlign.start,
-    //         ),
-    //         Text(
-    //           "${recipe.sodium == 0 ? '-' : recipe.sodium} sod",
-    //           style: TextStyle(color: Colors.red),
-    //           textAlign: TextAlign.start,
-    //         )
-    //       ],
-    //     ));
-    // result.add(rows);
-
-    return result;
   }
 }
