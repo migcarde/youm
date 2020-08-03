@@ -1,4 +1,10 @@
 {
     "preparation": "Preparación",
-    "ingredients": "Ingredientes"
+    "ingredients": "Ingredientes",
+    "recipes": "Recetas",
+    "title": "Youm!",
+    "diet": "Dieta",
+    "favorites": "Favoritos",
+    "shopping_list": "Carro",
+    "wall": "Muro"
   }

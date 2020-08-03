@@ -21,7 +21,13 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "diet" : MessageLookupByLibrary.simpleMessage("Dieta"),
+    "favorites" : MessageLookupByLibrary.simpleMessage("Favoritos"),
     "ingredients" : MessageLookupByLibrary.simpleMessage("Ingredientes"),
-    "preparation" : MessageLookupByLibrary.simpleMessage("Preparación")
+    "preparation" : MessageLookupByLibrary.simpleMessage("Preparación"),
+    "recipes" : MessageLookupByLibrary.simpleMessage("Recetas"),
+    "shopping_list" : MessageLookupByLibrary.simpleMessage("Carro"),
+    "title" : MessageLookupByLibrary.simpleMessage("Youm!"),
+    "wall" : MessageLookupByLibrary.simpleMessage("Muro")
   };
 }

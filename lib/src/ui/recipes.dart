@@ -10,28 +10,22 @@ class RecipesList extends StatelessWidget {
     bloc.fetchAllRecipes();
     PagedList recipes;
 
-    var scaffold = Scaffold(
-      appBar: AppBar(
-        title: Text('Recetas'),
-      ),
-      body: StreamBuilder(
-        stream: bloc.allRecipes,
-        builder: (context, AsyncSnapshot<PagedList> snapshot) {
-          if (snapshot.hasData) {
-            if (recipes == null) {
-              recipes = snapshot.data;
-            } else {
-              recipes.items.addAll(snapshot.data.items);
-            }
-            return buildPagedList(recipes);
-          } else if (snapshot.hasError) {
-            return Text(snapshot.error.toString());
+    return StreamBuilder(
+      stream: bloc.allRecipes,
+      builder: (context, AsyncSnapshot<PagedList> snapshot) {
+        if (snapshot.hasData) {
+          if (recipes == null) {
+            recipes = snapshot.data;
+          } else {
+            recipes.items.addAll(snapshot.data.items);
           }
-          return Center(child: CircularProgressIndicator());
-        },
-      ),
+          return buildPagedList(recipes);
+        } else if (snapshot.hasError) {
+          return Text(snapshot.error.toString());
+        }
+        return Center(child: CircularProgressIndicator());
+      },
     );
-    return scaffold;
   }
 
   Widget buildPagedList(PagedList recipes) {
@@ -115,7 +109,7 @@ class RecipesList extends StatelessWidget {
                       children: <Widget>[
                         Padding(
                             padding:
-                                EdgeInsets.only(left: 30, top: 10, bottom: 10),
+                                EdgeInsets.only(left: 40, top: 10, bottom: 10),
                             child: Text(
                               recipe.title,
                               maxLines: 1,

@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:youm/generated/l10n.dart';
+import 'package:youm/src/ui/home.dart';
 import 'package:youm/src/ui/recipeDetail.dart';
-import 'package:youm/src/ui/recipes.dart';
 
 class App extends StatelessWidget {
   @override
@@ -28,7 +28,7 @@ class App extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => Scaffold(body: RecipesList()),
+        '/': (context) => Scaffold(body: Home()),
         '/recipes': (context) => Scaffold(body: RecipeDetail())
       },
       localizationsDelegates: [

@@ -52,6 +52,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Recetas`
+  String get recipes {
+    return Intl.message(
+      'Recetas',
+      name: 'recipes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Youm!`
+  String get title {
+    return Intl.message(
+      'Youm!',
+      name: 'title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Diet`
+  String get diet {
+    return Intl.message(
+      'Diet',
+      name: 'diet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Favorites`
+  String get favorites {
+    return Intl.message(
+      'Favorites',
+      name: 'favorites',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cart`
+  String get shopping_list {
+    return Intl.message(
+      'Cart',
+      name: 'shopping_list',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wall`
+  String get wall {
+    return Intl.message(
+      'Wall',
+      name: 'wall',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
