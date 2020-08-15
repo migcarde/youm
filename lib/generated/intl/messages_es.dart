@@ -43,6 +43,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "shopping_list" : MessageLookupByLibrary.simpleMessage("Carro"),
     "tags" : MessageLookupByLibrary.simpleMessage("Etiquetas"),
     "title" : MessageLookupByLibrary.simpleMessage("Título"),
+    "title_validator" : MessageLookupByLibrary.simpleMessage("El título no puede estar vacío"),
     "wall" : MessageLookupByLibrary.simpleMessage("Muro")
   };
 }

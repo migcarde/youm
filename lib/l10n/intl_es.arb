@@ -21,5 +21,6 @@
     "tags": "Etiquetas",
     "easy": "Fácil",
     "average": "Normal",
-    "hard": "Difícil"
+    "hard": "Difícil",
+    "title_validator": "El título no puede estar vacío"
   }

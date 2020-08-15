@@ -21,5 +21,6 @@
   "tags": "Tags",
   "easy": "Easy",
   "average": "Average",
-  "hard": "Hard"
+  "hard": "Hard",
+  "title_validator": "Title cannot be empty"
 }

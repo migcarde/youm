@@ -7,9 +7,9 @@ class CreateRecipe extends StatefulWidget {
 }
 
 class _CreateRecipeState extends State<CreateRecipe> {
+  int _value = 1;
   @override
   Widget build(BuildContext context) {
-    int _value = 1;
     return Scaffold(
       appBar: AppBar(title: Text(S.of(context).create_recipe)),
       body: Container(
@@ -18,6 +18,9 @@ class _CreateRecipeState extends State<CreateRecipe> {
         child: Column(
           children: [
             TextFormField(
+              validator: (value) => value.trim().length == 0
+                  ? S.of(context).title_validator
+                  : null,
               maxLength: 50,
               decoration: InputDecoration(labelText: S.of(context).title),
             ),

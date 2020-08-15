@@ -262,6 +262,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Title cannot be empty`
+  String get title_validator {
+    return Intl.message(
+      'Title cannot be empty',
+      name: 'title_validator',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
