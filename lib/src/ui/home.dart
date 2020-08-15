@@ -20,12 +20,12 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(S.of(context).title)),
+      appBar: AppBar(title: Text(S.of(context).app_title)),
       body: _children[_currentIndex],
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         elevation: 0,
-        onPressed: () {},
+        onPressed: () => Navigator.pushNamed(context, '/recipes/create'),
         backgroundColor: Colors.green,
         child: Icon(
           Icons.add,

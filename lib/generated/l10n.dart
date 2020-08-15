@@ -64,10 +64,10 @@ class S {
   }
 
   /// `Youm!`
-  String get title {
+  String get app_title {
     return Intl.message(
       'Youm!',
-      name: 'title',
+      name: 'app_title',
       desc: '',
       args: [],
     );
@@ -108,6 +108,156 @@ class S {
     return Intl.message(
       'Wall',
       name: 'wall',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create recipe`
+  String get create_recipe {
+    return Intl.message(
+      'Create recipe',
+      name: 'create_recipe',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Title`
+  String get title {
+    return Intl.message(
+      'Title',
+      name: 'title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get description {
+    return Intl.message(
+      'Description',
+      name: 'description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Image`
+  String get picture {
+    return Intl.message(
+      'Image',
+      name: 'picture',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ration`
+  String get ration {
+    return Intl.message(
+      'Ration',
+      name: 'ration',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Calories`
+  String get calories {
+    return Intl.message(
+      'Calories',
+      name: 'calories',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Proteins`
+  String get proteins {
+    return Intl.message(
+      'Proteins',
+      name: 'proteins',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Carbohydrate`
+  String get carbohydrate {
+    return Intl.message(
+      'Carbohydrate',
+      name: 'carbohydrate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fat`
+  String get fat {
+    return Intl.message(
+      'Fat',
+      name: 'fat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Difficulty`
+  String get difficulty {
+    return Intl.message(
+      'Difficulty',
+      name: 'difficulty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Preparation`
+  String get preparation_time {
+    return Intl.message(
+      'Preparation',
+      name: 'preparation_time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tags`
+  String get tags {
+    return Intl.message(
+      'Tags',
+      name: 'tags',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Easy`
+  String get easy {
+    return Intl.message(
+      'Easy',
+      name: 'easy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Average`
+  String get average {
+    return Intl.message(
+      'Average',
+      name: 'average',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hard`
+  String get hard {
+    return Intl.message(
+      'Hard',
+      name: 'hard',
       desc: '',
       args: [],
     );

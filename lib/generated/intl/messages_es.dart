@@ -21,13 +21,28 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "app_title" : MessageLookupByLibrary.simpleMessage("Youm!"),
+    "average" : MessageLookupByLibrary.simpleMessage("Normal"),
+    "calories" : MessageLookupByLibrary.simpleMessage("Calorías"),
+    "carbohydrate" : MessageLookupByLibrary.simpleMessage("Carbohidratos"),
+    "create_recipe" : MessageLookupByLibrary.simpleMessage("Crear receta"),
+    "description" : MessageLookupByLibrary.simpleMessage("Description"),
     "diet" : MessageLookupByLibrary.simpleMessage("Dieta"),
+    "difficulty" : MessageLookupByLibrary.simpleMessage("Dificultad"),
+    "easy" : MessageLookupByLibrary.simpleMessage("Fácil"),
+    "fat" : MessageLookupByLibrary.simpleMessage("Grasa"),
     "favorites" : MessageLookupByLibrary.simpleMessage("Favoritos"),
+    "hard" : MessageLookupByLibrary.simpleMessage("Difícil"),
     "ingredients" : MessageLookupByLibrary.simpleMessage("Ingredientes"),
+    "picture" : MessageLookupByLibrary.simpleMessage("Imagen"),
     "preparation" : MessageLookupByLibrary.simpleMessage("Preparación"),
+    "preparation_time" : MessageLookupByLibrary.simpleMessage("Tiempo de preparación"),
+    "proteins" : MessageLookupByLibrary.simpleMessage("Proteinas"),
+    "ration" : MessageLookupByLibrary.simpleMessage("Raciones"),
     "recipes" : MessageLookupByLibrary.simpleMessage("Recetas"),
     "shopping_list" : MessageLookupByLibrary.simpleMessage("Carro"),
-    "title" : MessageLookupByLibrary.simpleMessage("Youm!"),
+    "tags" : MessageLookupByLibrary.simpleMessage("Etiquetas"),
+    "title" : MessageLookupByLibrary.simpleMessage("Título"),
     "wall" : MessageLookupByLibrary.simpleMessage("Muro")
   };
 }

@@ -57,92 +57,92 @@ class RecipesList extends StatelessWidget {
 
   Widget cardBox(RecipeModel recipe, BuildContext context) {
     return InkWell(
-        onTap: () =>
-            {Navigator.pushNamed(context, '/recipes', arguments: recipe)},
-        highlightColor: Colors.transparent,
-        splashColor: Colors.transparent,
-        child: Container(
-            alignment: Alignment.centerLeft,
-            margin: EdgeInsets.fromLTRB(10, 2, 10, 2),
-            child: Stack(alignment: Alignment.centerLeft, children: <Widget>[
-              Container(
-                  margin: EdgeInsets.only(left: 55, top: 60),
-                  padding: EdgeInsets.all(3),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.lightGreen, width: 1),
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10))),
-                  child: Text(
-                    "${recipe.sodium == 0 ? '-' : recipe.sodium} sod",
-                    style: TextStyle(color: Colors.black),
-                    textAlign: TextAlign.start,
-                  )),
-              Container(
-                alignment: Alignment.bottomRight,
-                child: Container(
-                    margin: EdgeInsets.only(right: 20, top: 60),
-                    padding: EdgeInsets.all(3),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.orange, width: 1),
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(10),
-                            bottomRight: Radius.circular(10))),
-                    child: Text(
-                      "${recipe.sodium == 0 ? '-' : recipe.proteins} pro",
-                      style: TextStyle(color: Colors.black),
-                      textAlign: TextAlign.start,
-                    )),
-              ),
-              Container(
-                  margin: EdgeInsets.only(left: 30),
-                  padding: EdgeInsets.only(right: 10),
-                  alignment: Alignment.centerLeft,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.blue, width: 1),
-                      borderRadius: BorderRadius.circular(15.0)),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Padding(
-                            padding:
-                                EdgeInsets.only(left: 40, top: 10, bottom: 10),
-                            child: Text(
-                              recipe.title,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 18),
-                              textAlign: TextAlign.start,
-                            )),
-                      ])),
-              Container(
-                  width: 60,
-                  decoration: BoxDecoration(
+      onTap: () =>
+          {Navigator.pushNamed(context, '/recipes', arguments: recipe)},
+      highlightColor: Colors.transparent,
+      splashColor: Colors.transparent,
+      child: Container(
+        alignment: Alignment.centerLeft,
+        margin: EdgeInsets.fromLTRB(10, 2, 10, 2),
+        child: Stack(alignment: Alignment.centerLeft, children: <Widget>[
+          Container(
+              margin: EdgeInsets.only(left: 55, top: 60),
+              padding: EdgeInsets.all(3),
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(color: Colors.lightGreen, width: 1),
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10))),
+              child: Text(
+                "${recipe.sodium == 0 ? '-' : recipe.sodium} sod",
+                style: TextStyle(color: Colors.black),
+                textAlign: TextAlign.start,
+              )),
+          Container(
+            alignment: Alignment.bottomRight,
+            child: Container(
+                margin: EdgeInsets.only(right: 20, top: 60),
+                padding: EdgeInsets.all(3),
+                decoration: BoxDecoration(
                     color: Colors.white,
-                    border: Border.all(color: Colors.red),
-                    shape: BoxShape.circle,
+                    border: Border.all(color: Colors.orange, width: 1),
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10))),
+                child: Text(
+                  "${recipe.sodium == 0 ? '-' : recipe.proteins} pro",
+                  style: TextStyle(color: Colors.black),
+                  textAlign: TextAlign.start,
+                )),
+          ),
+          Container(
+              margin: EdgeInsets.only(left: 30),
+              padding: EdgeInsets.only(right: 10),
+              alignment: Alignment.centerLeft,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(color: Colors.blue, width: 1),
+                  borderRadius: BorderRadius.circular(15.0)),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                        padding: EdgeInsets.only(left: 40, top: 10, bottom: 10),
+                        child: Text(
+                          recipe.title,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(color: Colors.black, fontSize: 18),
+                          textAlign: TextAlign.start,
+                        )),
+                  ])),
+          Container(
+              width: 60,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(color: Colors.red),
+                shape: BoxShape.circle,
+              ),
+              child: Column(
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(top: 5),
+                    child: Image.asset(
+                      'assets/icons/fire.png',
+                      color: Colors.orange,
+                      width: 25,
+                    ),
                   ),
-                  child: Column(
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.only(top: 5),
-                        child: Image.asset(
-                          'assets/icons/fire.png',
-                          color: Colors.orange,
-                          width: 25,
-                        ),
-                      ),
-                      Padding(
-                          padding: EdgeInsets.only(bottom: 5),
-                          child: Text(recipe.calories == 0
-                              ? '-'
-                              : recipe.calories.toString()))
-                    ],
-                  ))
-            ])));
+                  Padding(
+                      padding: EdgeInsets.only(bottom: 5),
+                      child: Text(recipe.calories == 0
+                          ? '-'
+                          : recipe.calories.toString()))
+                ],
+              ))
+        ]),
+      ),
+    );
   }
 }

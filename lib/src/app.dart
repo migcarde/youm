@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:youm/generated/l10n.dart';
+import 'package:youm/src/ui/createRecipe.dart';
 import 'package:youm/src/ui/home.dart';
 import 'package:youm/src/ui/recipeDetail.dart';
 
@@ -29,7 +30,10 @@ class App extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => Scaffold(body: Home()),
-        '/recipes': (context) => Scaffold(body: RecipeDetail())
+        '/recipes': (context) => Scaffold(body: RecipeDetail()),
+        '/recipes/create': (context) => Scaffold(
+              body: CreateRecipe(),
+            )
       },
       localizationsDelegates: [
         S.delegate,
