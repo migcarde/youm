@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:youm/src/models/DTO/recipeDTO.dart';
+import 'package:youm/src/models/DTO/recipeForCreationDTO.dart';
 import 'package:youm/src/models/headers/pagination.dart';
 import 'package:youm/src/models/pagedList.dart';
 import 'package:youm/src/models/recipeModel.dart';
@@ -38,6 +39,21 @@ class RecipeApiProvider {
       return PagedList<RecipeDTO>.fromJson(pagination, recipes);
     } else {
       throw Exception('Failed to load recipes');
+    }
+  }
+
+  Future<RecipeDTO> postRecipe(RecipeForCreationDTO recipeForCreation) async {
+    final response = await http.post(
+        'https://youm20200719211256.azurewebsites.net/api/recipes',
+        body: recipeForCreation);
+
+    if (response.statusCode == 200) {
+      var body = json.decode(response.body);
+      var recipe = RecipeDTO.fromJson(body);
+
+      return recipe;
+    } else {
+      throw new Exception('Failed to create recipe');
     }
   }
 }

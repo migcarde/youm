@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1019330254842",
+    "firebase_url": "https://youm-dccbb.firebaseio.com",
+    "project_id": "youm-dccbb",
+    "storage_bucket": "youm-dccbb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1019330254842:android:78174a464a4b352c73b643",
+        "android_client_info": {
+          "package_name": "com.bamboo.youm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1019330254842-bu6h6hr0hrrj40cgsu5s9dvrfd4v7tq6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAnttTyWTDy1jwob-FN6XISPJgZido5N0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1019330254842-bu6h6hr0hrrj40cgsu5s9dvrfd4v7tq6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1019330254842-hmja2j4f1ljbp3lhn0piv5g6ehkob1an.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.bamboo.youm"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

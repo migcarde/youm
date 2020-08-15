@@ -5,6 +5,7 @@ class RecipeDTO {
   String id;
   String title;
   String description;
+  String picture;
   int quantity;
   double calories;
   double proteins;
@@ -20,6 +21,7 @@ class RecipeDTO {
       {this.id,
       this.title,
       this.description,
+      this.picture,
       this.quantity,
       this.calories,
       this.proteins,
@@ -36,6 +38,7 @@ class RecipeDTO {
         id: json['id'],
         title: json['title'],
         description: json['description'],
+        picture: json['picture'],
         quantity: json['quantity'],
         calories: json['calories'].toDouble(),
         proteins: json['proteins'].toDouble(),

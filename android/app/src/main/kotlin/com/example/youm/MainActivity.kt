@@ -1,4 +1,4 @@
-package com.example.youm
+package com.bamboo.youm
 
 import io.flutter.embedding.android.FlutterActivity
 
