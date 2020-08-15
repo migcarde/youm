@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:youm/generated/l10n.dart';
-import 'package:youm/src/ui/recipes.dart';
+import 'package:youm/src/ui/recipesList.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -20,25 +20,50 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text(S.of(context).title)),
-        body: _children[_currentIndex],
-        bottomNavigationBar: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            currentIndex: _currentIndex,
-            onTap: onTabTapped,
-            items: [
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.calendar_today),
-                  title: Text(S.of(context).diet)),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.favorite),
-                  title: Text(S.of(context).favorites)),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.shopping_cart),
-                  title: Text(S.of(context).shopping_list)),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.apps), title: Text(S.of(context).wall))
-            ]));
+      appBar: AppBar(title: Text(S.of(context).title)),
+      body: _children[_currentIndex],
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        elevation: 0,
+        onPressed: () {},
+        backgroundColor: Colors.green,
+        child: Icon(
+          Icons.add,
+          size: 40,
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+              icon: Icon(Icons.calendar_today,
+                  color: 0 == _currentIndex ? Colors.blue : Colors.black),
+              onPressed: () => onTabTapped(0),
+            ),
+            IconButton(
+              icon: Icon(Icons.favorite,
+                  color: 1 == _currentIndex ? Colors.blue : Colors.black),
+              onPressed: () => onTabTapped(1),
+            ),
+            Container(
+              height: 0,
+            ),
+            IconButton(
+              icon: Icon(Icons.shopping_cart,
+                  color: 2 == _currentIndex ? Colors.blue : Colors.black),
+              onPressed: () => onTabTapped(2),
+            ),
+            IconButton(
+                icon: Icon(Icons.apps,
+                    color: 3 == _currentIndex ? Colors.blue : Colors.black),
+                onPressed: () => onTabTapped(3)),
+          ],
+        ),
+      ),
+    );
   }
 
   void onTabTapped(int index) => setState(() {
