@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:youm/generated/l10n.dart';
 
 class CreateRecipe extends StatefulWidget {
@@ -8,99 +9,223 @@ class CreateRecipe extends StatefulWidget {
 
 class _CreateRecipeState extends State<CreateRecipe> {
   int _value = 1;
+  var _tags = List<String>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(S.of(context).create_recipe)),
       body: Container(
         alignment: Alignment.center,
-        margin: EdgeInsets.only(top: 10, left: 30, right: 30),
-        child: Column(
+        child: ListView(
+          padding: EdgeInsets.only(top: 10, left: 30, right: 30),
           children: [
-            TextFormField(
-              validator: (value) => value.trim().length == 0
-                  ? S.of(context).title_validator
-                  : null,
-              maxLength: 50,
-              decoration: InputDecoration(labelText: S.of(context).title),
-            ),
-            TextFormField(
-              decoration: InputDecoration(labelText: S.of(context).description),
-            ),
-            Row(
+            Column(
               children: [
-                Flexible(
-                  child: Padding(
-                    padding: EdgeInsets.only(right: 5),
-                    child: TextFormField(
-                        decoration:
-                            InputDecoration(labelText: S.of(context).ration)),
-                  ),
-                ),
-                Flexible(
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 5),
-                    child: TextFormField(
-                      decoration:
-                          InputDecoration(labelText: S.of(context).calories),
+                TextFormField(
+                  validator: (value) => value.trim().length == 0
+                      ? S.of(context).title_validator
+                      : null,
+                  maxLength: 50,
+                  decoration: InputDecoration(
+                    labelText: S.of(context).title,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(5),
+                      ),
                     ),
                   ),
                 ),
-              ],
-            ),
-            Row(
-              children: [
-                Flexible(
-                  child: Padding(
-                    padding: EdgeInsets.only(right: 5),
-                    child: TextFormField(
-                        decoration:
-                            InputDecoration(labelText: S.of(context).proteins)),
-                  ),
-                ),
-                Flexible(
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 5),
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                          labelText: S.of(context).carbohydrate),
+                Padding(
+                  padding: EdgeInsets.only(top: 10),
+                  child: TextFormField(
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                    decoration: InputDecoration(
+                      labelText: S.of(context).description,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(5),
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ],
-            ),
-            Row(
-              children: [
-                Flexible(
-                  child: Padding(
-                    padding: EdgeInsets.only(right: 5),
-                    child: TextFormField(
-                        decoration:
-                            InputDecoration(labelText: S.of(context).fat)),
+                Padding(
+                  padding: EdgeInsets.only(top: 10),
+                  child: Row(
+                    children: [
+                      Flexible(
+                        child: Padding(
+                          padding: EdgeInsets.only(right: 5),
+                          child: TextFormField(
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              WhitelistingTextInputFormatter.digitsOnly,
+                            ],
+                            decoration: InputDecoration(
+                              labelText: S.of(context).ration,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(5),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Flexible(
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 5),
+                          child: TextFormField(
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              WhitelistingTextInputFormatter.digitsOnly,
+                            ],
+                            decoration: InputDecoration(
+                              labelText: S.of(context).calories,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(5),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                Flexible(
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 5),
-                    child: DropdownButton(
-                      value: _value,
-                      items: [
-                        DropdownMenuItem(
-                          child: Text(S.of(context).easy),
-                          value: 1,
+                Padding(
+                  padding: EdgeInsets.only(top: 10),
+                  child: Row(
+                    children: [
+                      Flexible(
+                        child: Padding(
+                          padding: EdgeInsets.only(right: 5),
+                          child: TextFormField(
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              WhitelistingTextInputFormatter.digitsOnly,
+                            ],
+                            decoration: InputDecoration(
+                              labelText: S.of(context).proteins,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(5),
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
-                        DropdownMenuItem(
-                          child: Text(S.of(context).average),
-                          value: 2,
+                      ),
+                      Flexible(
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 5),
+                          child: TextFormField(
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              WhitelistingTextInputFormatter.digitsOnly,
+                            ],
+                            decoration: InputDecoration(
+                              labelText: S.of(context).carbohydrate,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(5),
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
-                        DropdownMenuItem(
-                          child: Text(S.of(context).hard),
-                          value: 3,
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 10),
+                  child: Row(
+                    children: [
+                      Flexible(
+                        child: Padding(
+                          padding: EdgeInsets.only(right: 5),
+                          child: TextFormField(
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              WhitelistingTextInputFormatter.digitsOnly,
+                            ],
+                            decoration: InputDecoration(
+                              labelText: S.of(context).fat,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(5),
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
-                      ],
-                      onChanged: (value) => setState(() => _value = value),
+                      ),
+                      Flexible(
+                        child: Container(
+                          width: double.infinity,
+                          margin: EdgeInsets.only(left: 5),
+                          padding: EdgeInsets.fromLTRB(10, 4, 10, 4),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey, width: 1),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: DropdownButton(
+                            underline: SizedBox(),
+                            value: _value,
+                            items: [
+                              DropdownMenuItem(
+                                child: Text(S.of(context).easy),
+                                value: 1,
+                              ),
+                              DropdownMenuItem(
+                                child: Text(S.of(context).average),
+                                value: 2,
+                              ),
+                              DropdownMenuItem(
+                                child: Text(S.of(context).hard),
+                                value: 3,
+                              ),
+                            ],
+                            onChanged: (value) =>
+                                setState(() => _value = value),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 5),
+                  child: TextFormField(
+                    textInputAction: TextInputAction.go,
+                    onFieldSubmitted: (value) =>
+                        setState(() => _tags.insert(0, value)),
+                    decoration: InputDecoration(
+                      labelText: S.of(context).ingredients,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(5),
+                        ),
+                      ),
                     ),
                   ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(top: 5),
+                  child: Wrap(
+                      children: _tags
+                          .map(
+                            (e) => Chip(
+                              label: Text(e),
+                              deleteIcon: Icon(Icons.close),
+                              padding: EdgeInsets.only(right: 5, left: 5),
+                              onDeleted: () => setState(() => _tags.remove(e)),
+                            ),
+                          )
+                          .toList()),
                 ),
               ],
             ),
