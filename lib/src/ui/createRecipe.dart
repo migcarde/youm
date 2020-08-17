@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:youm/generated/l10n.dart';
 
 class CreateRecipe extends StatefulWidget {
@@ -9,7 +10,13 @@ class CreateRecipe extends StatefulWidget {
 
 class _CreateRecipeState extends State<CreateRecipe> {
   int _value = 1;
-  var _tags = List<String>();
+  var _ingredients = List<String>();
+  final picker = ImagePicker();
+
+  Future getImage() async {
+    final pickedImage = await picker.getImage(source: ImageSource.gallery);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,6 +28,10 @@ class _CreateRecipeState extends State<CreateRecipe> {
           children: [
             Column(
               children: [
+                MaterialButton(
+                  onPressed: () => getImage(),
+                  child: Text("Camara"),
+                ),
                 TextFormField(
                   validator: (value) => value.trim().length == 0
                       ? S.of(context).title_validator
@@ -201,8 +212,16 @@ class _CreateRecipeState extends State<CreateRecipe> {
                   padding: EdgeInsets.only(top: 5),
                   child: TextFormField(
                     textInputAction: TextInputAction.go,
-                    onFieldSubmitted: (value) =>
-                        setState(() => _tags.insert(0, value)),
+                    onFieldSubmitted: (value) => setState(() {
+                      if (_ingredients.contains(value)) {
+                        var snackbar = SnackBar(
+                          content: Text("Ya contienes $value como etiqueta"),
+                        );
+                        Scaffold.of(context).showSnackBar(snackbar);
+                      } else {
+                        _ingredients.insert(0, value);
+                      }
+                    }),
                     decoration: InputDecoration(
                       labelText: S.of(context).ingredients,
                       border: OutlineInputBorder(
@@ -216,13 +235,17 @@ class _CreateRecipeState extends State<CreateRecipe> {
                 Container(
                   padding: EdgeInsets.only(top: 5),
                   child: Wrap(
-                      children: _tags
+                      children: _ingredients
                           .map(
-                            (e) => Chip(
-                              label: Text(e),
-                              deleteIcon: Icon(Icons.close),
+                            (e) => Padding(
                               padding: EdgeInsets.only(right: 5, left: 5),
-                              onDeleted: () => setState(() => _tags.remove(e)),
+                              child: Chip(
+                                label: Text(e),
+                                deleteIcon: Icon(Icons.close),
+                                padding: EdgeInsets.only(right: 5, left: 5),
+                                onDeleted: () =>
+                                    setState(() => _ingredients.remove(e)),
+                              ),
                             ),
                           )
                           .toList()),
