@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
@@ -10,11 +12,14 @@ class CreateRecipe extends StatefulWidget {
 
 class _CreateRecipeState extends State<CreateRecipe> {
   int _value = 1;
+  PickedFile _image;
   var _ingredients = List<String>();
   final picker = ImagePicker();
 
   Future getImage() async {
     final pickedImage = await picker.getImage(source: ImageSource.gallery);
+
+    setState(() => _image = pickedImage);
   }
 
   @override
@@ -46,6 +51,9 @@ class _CreateRecipeState extends State<CreateRecipe> {
                     ),
                   ),
                 ),
+                _image == null
+                    ? Text("No image")
+                    : Image.file(File(_image.path)),
                 Padding(
                   padding: EdgeInsets.only(top: 10),
                   child: TextFormField(
