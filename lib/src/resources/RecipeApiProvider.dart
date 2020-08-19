@@ -45,7 +45,8 @@ class RecipeApiProvider {
   Future<RecipeDTO> postRecipe(RecipeForCreationDTO recipeForCreation) async {
     final response = await http.post(
         'https://youm20200719211256.azurewebsites.net/api/recipes',
-        body: recipeForCreation);
+        body: jsonEncode(recipeForCreation),
+        headers: {"content-Type": "application/json"});
 
     if (response.statusCode == 200) {
       var body = json.decode(response.body);

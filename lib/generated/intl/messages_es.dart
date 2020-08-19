@@ -38,12 +38,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "preparation" : MessageLookupByLibrary.simpleMessage("Preparación"),
     "preparation_time" : MessageLookupByLibrary.simpleMessage("Tiempo de preparación"),
     "proteins" : MessageLookupByLibrary.simpleMessage("Proteinas"),
+    "quantity" : MessageLookupByLibrary.simpleMessage("Cantidad"),
     "ration" : MessageLookupByLibrary.simpleMessage("Raciones"),
     "recipes" : MessageLookupByLibrary.simpleMessage("Recetas"),
     "shopping_list" : MessageLookupByLibrary.simpleMessage("Carro"),
     "tags" : MessageLookupByLibrary.simpleMessage("Etiquetas"),
     "title" : MessageLookupByLibrary.simpleMessage("Título"),
     "title_validator" : MessageLookupByLibrary.simpleMessage("El título no puede estar vacío"),
+    "unit" : MessageLookupByLibrary.simpleMessage("Unidad"),
     "wall" : MessageLookupByLibrary.simpleMessage("Muro")
   };
 }

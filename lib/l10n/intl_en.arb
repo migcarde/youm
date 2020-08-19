@@ -22,5 +22,7 @@
   "easy": "Easy",
   "average": "Average",
   "hard": "Hard",
-  "title_validator": "Title cannot be empty"
+  "title_validator": "Title cannot be empty",
+  "quantity": "Quantity",
+  "unit": "Unit"
 }

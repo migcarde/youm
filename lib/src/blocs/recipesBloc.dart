@@ -12,6 +12,7 @@ class RecipesBloc {
   final recipe = PublishSubject<RecipeDTO>();
 
   Stream<PagedList> get allRecipes => recipesFetcher.stream;
+  Stream<RecipeDTO> get postedRecipe => recipe.stream;
 
   fetchAllRecipes({int page = 1}) async {
     PagedList recipes = await repository.fetchAllRecipes(page: page);

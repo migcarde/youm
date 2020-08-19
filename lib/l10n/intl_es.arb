@@ -22,5 +22,7 @@
     "easy": "Fácil",
     "average": "Normal",
     "hard": "Difícil",
-    "title_validator": "El título no puede estar vacío"
+    "title_validator": "El título no puede estar vacío",
+    "quantity": "Cantidad",
+    "unit": "Unidad"
   }
