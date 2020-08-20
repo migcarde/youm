@@ -24,5 +24,13 @@
     "hard": "Difícil",
     "title_validator": "El título no puede estar vacío",
     "quantity": "Cantidad",
-    "unit": "Unidad"
+    "unit": "Unidad",
+    "camera": "Cámara",
+    "basic_data": "Datos básicos",
+    "details": "Detalles",
+    "nutritional_info": "Información nutricional",
+    "add_ingredient": "Añadir ingrediente",
+    "add": "Añadir",
+    "steps": "Pasos",
+    "step": "Paso"
   }

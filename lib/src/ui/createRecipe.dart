@@ -16,11 +16,13 @@ class CreateRecipe extends StatefulWidget {
 class _CreateRecipeState extends State<CreateRecipe> {
   final _formKey = GlobalKey<FormState>();
   final _popKey = GlobalKey<FormState>();
+  int _step = 0;
   String _value = 'EASY';
   PickedFile _image;
   var _ingredients = List<String>();
   final picker = ImagePicker();
   RecipeForCreationDTO _recipe = RecipeForCreationDTO.create();
+  var stepController = TextEditingController();
 
   Future getImage() async {
     final pickedImage = await picker.getImage(source: ImageSource.gallery);
@@ -34,38 +36,67 @@ class _CreateRecipeState extends State<CreateRecipe> {
       appBar: AppBar(title: Text(S.of(context).create_recipe)),
       body: Container(
         alignment: Alignment.center,
-        child: ListView(
-          padding: EdgeInsets.only(top: 10, left: 30, right: 30),
-          children: [
-            Form(
-              key: _formKey,
-              child: Column(
+        child: Stepper(
+          type: StepperType.vertical,
+          currentStep: _step,
+          onStepContinue: () {
+            if (_step >= 0 && _step < 2) {
+              setState(() => _step++);
+            }
+          },
+          onStepCancel: () {
+            if (_step > 0 && _step < 3) {
+              setState(() => _step--);
+            }
+          },
+          steps: [
+            Step(
+              isActive: _step == 0,
+              title: Text(S.of(context).basic_data),
+              content: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  MaterialButton(
-                    onPressed: () => getImage(),
-                    child: Text("Camara"),
-                  ),
-                  TextFormField(
-                    validator: (value) => value.trim().length == 0
-                        ? S.of(context).title_validator
-                        : null,
-                    maxLength: 50,
-                    decoration: InputDecoration(
-                      labelText: S.of(context).title,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(5),
+                  _image == null
+                      ? Padding(
+                          padding: EdgeInsets.only(top: 10),
+                          child: OutlineButton.icon(
+                            icon: Icon(Icons.photo_camera),
+                            padding: EdgeInsets.all(18),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            borderSide:
+                                BorderSide(color: Colors.grey, width: 1),
+                            onPressed: () => getImage(),
+                            label: Text(S.of(context).camera),
+                          ),
+                        )
+                      : InkWell(
+                          child: Image.file(File(_image.path),
+                              height: 250, fit: BoxFit.cover),
+                          onTap: () => getImage(),
+                        ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 10),
+                    child: TextFormField(
+                      validator: (value) => value.trim().length == 0
+                          ? S.of(context).title_validator
+                          : null,
+                      maxLength: 50,
+                      decoration: InputDecoration(
+                        labelText: S.of(context).title,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(5),
+                          ),
                         ),
                       ),
+                      onSaved: (value) => {
+                        if (value.length > 0)
+                          {setState(() => _recipe.title = value)}
+                      },
                     ),
-                    onSaved: (value) => {
-                      if (value.length > 0)
-                        {setState(() => _recipe.title = value)}
-                    },
                   ),
-                  _image == null
-                      ? Text("No image")
-                      : Image.file(File(_image.path)),
                   Padding(
                     padding: EdgeInsets.only(top: 10),
                     child: TextFormField(
@@ -84,6 +115,14 @@ class _CreateRecipeState extends State<CreateRecipe> {
                       },
                     ),
                   ),
+                ],
+              ),
+            ),
+            Step(
+              isActive: _step == 1,
+              title: Text(S.of(context).details),
+              content: Column(
+                children: [
                   Padding(
                     padding: EdgeInsets.only(top: 10),
                     child: Row(
@@ -97,103 +136,7 @@ class _CreateRecipeState extends State<CreateRecipe> {
                                 WhitelistingTextInputFormatter.digitsOnly,
                               ],
                               decoration: InputDecoration(
-                                labelText: S.of(context).ration,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(5),
-                                  ),
-                                ),
-                              ),
-                              onSaved: (value) {
-                                if (value.length > 0) {
-                                  setState(() =>
-                                      _recipe.quantity = int.parse(value));
-                                }
-                              },
-                            ),
-                          ),
-                        ),
-                        Flexible(
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 5),
-                            child: TextFormField(
-                              keyboardType: TextInputType.number,
-                              inputFormatters: [
-                                WhitelistingTextInputFormatter.digitsOnly,
-                              ],
-                              decoration: InputDecoration(
-                                labelText: S.of(context).calories,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(5),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 10),
-                    child: Row(
-                      children: [
-                        Flexible(
-                          child: Padding(
-                            padding: EdgeInsets.only(right: 5),
-                            child: TextFormField(
-                              keyboardType: TextInputType.number,
-                              inputFormatters: [
-                                WhitelistingTextInputFormatter.digitsOnly,
-                              ],
-                              decoration: InputDecoration(
-                                labelText: S.of(context).proteins,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(5),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Flexible(
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 5),
-                            child: TextFormField(
-                              keyboardType: TextInputType.number,
-                              inputFormatters: [
-                                WhitelistingTextInputFormatter.digitsOnly,
-                              ],
-                              decoration: InputDecoration(
-                                labelText: S.of(context).carbohydrate,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(5),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 10),
-                    child: Row(
-                      children: [
-                        Flexible(
-                          child: Padding(
-                            padding: EdgeInsets.only(right: 5),
-                            child: TextFormField(
-                              keyboardType: TextInputType.number,
-                              inputFormatters: [
-                                WhitelistingTextInputFormatter.digitsOnly,
-                              ],
-                              decoration: InputDecoration(
-                                labelText: S.of(context).fat,
+                                labelText: S.of(context).quantity,
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(5),
@@ -240,21 +183,14 @@ class _CreateRecipeState extends State<CreateRecipe> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 5),
+                    padding: EdgeInsets.only(top: 10),
                     child: TextFormField(
-                      textInputAction: TextInputAction.go,
-                      onFieldSubmitted: (value) => setState(() {
-                        if (_ingredients.contains(value)) {
-                          var snackbar = SnackBar(
-                            content: Text("Ya contienes $value como etiqueta"),
-                          );
-                          Scaffold.of(context).showSnackBar(snackbar);
-                        } else {
-                          _ingredients.insert(0, value);
-                        }
-                      }),
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [
+                        WhitelistingTextInputFormatter.digitsOnly,
+                      ],
                       decoration: InputDecoration(
-                        labelText: S.of(context).ingredients,
+                        labelText: S.of(context).preparation_time,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(
                             Radius.circular(5),
@@ -263,36 +199,22 @@ class _CreateRecipeState extends State<CreateRecipe> {
                       ),
                     ),
                   ),
-                  Container(
-                    padding: EdgeInsets.only(top: 5),
-                    child: Wrap(
-                        children: _ingredients
-                            .map(
-                              (e) => Padding(
-                                padding: EdgeInsets.only(right: 5, left: 5),
-                                child: Chip(
-                                  label: Text(e),
-                                  deleteIcon: Icon(Icons.close),
-                                  padding: EdgeInsets.only(right: 5, left: 5),
-                                  onDeleted: () =>
-                                      setState(() => _ingredients.remove(e)),
-                                ),
-                              ),
-                            )
-                            .toList()),
-                  ),
                   MaterialButton(
+                    color: Colors.blue,
+                    textColor: Colors.white,
                     onPressed: () => showDialog(
                       context: context,
                       builder: (context) {
                         var ingredient = IngredientForCreationDTO.create();
                         return AlertDialog(
-                          title: Text('Prueba'),
+                          title: Text(S.of(context).add_ingredient),
                           content: Form(
                             key: _popKey,
                             child: Wrap(
                               children: [
-                                TextFormField(
+                                Padding(
+                                  padding: EdgeInsets.only(top: 10),
+                                  child: TextFormField(
                                     decoration: InputDecoration(
                                       labelText: S.of(context).title,
                                       border: OutlineInputBorder(
@@ -305,52 +227,57 @@ class _CreateRecipeState extends State<CreateRecipe> {
                                       if (value.length > 0) {
                                         ingredient.name = value;
                                       }
-                                    }),
-                                Row(
-                                  children: [
-                                    Flexible(
-                                      child: Padding(
-                                        padding: EdgeInsets.only(right: 5),
-                                        child: TextFormField(
-                                          keyboardType: TextInputType.number,
-                                          inputFormatters: [
-                                            WhitelistingTextInputFormatter
-                                                .digitsOnly,
-                                          ],
-                                          decoration: InputDecoration(
-                                            labelText: S.of(context).ration,
-                                            border: OutlineInputBorder(
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(5),
+                                    },
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(top: 10),
+                                  child: Row(
+                                    children: [
+                                      Flexible(
+                                        child: Padding(
+                                          padding: EdgeInsets.only(right: 5),
+                                          child: TextFormField(
+                                            keyboardType: TextInputType.number,
+                                            inputFormatters: [
+                                              WhitelistingTextInputFormatter
+                                                  .digitsOnly,
+                                            ],
+                                            decoration: InputDecoration(
+                                              labelText: S.of(context).ration,
+                                              border: OutlineInputBorder(
+                                                borderRadius: BorderRadius.all(
+                                                  Radius.circular(5),
+                                                ),
                                               ),
                                             ),
+                                            onSaved: (value) {
+                                              if (value.length > 0) {
+                                                ingredient.quantity =
+                                                    double.parse(value);
+                                              }
+                                            },
                                           ),
-                                          onSaved: (value) {
-                                            if (value.length > 0) {
-                                              ingredient.quantity =
-                                                  double.parse(value);
-                                            }
-                                          },
                                         ),
                                       ),
-                                    ),
-                                    Flexible(
-                                      child: Padding(
-                                        padding: EdgeInsets.only(left: 5),
-                                        child: DropdownButton(
-                                            underline: SizedBox(),
-                                            value: "KG",
-                                            items: [
-                                              DropdownMenuItem(
-                                                child: Text("KG"),
-                                                value: 'KG',
-                                              ),
-                                            ],
-                                            onChanged: (value) =>
-                                                ingredient.unit = value),
+                                      Flexible(
+                                        child: Padding(
+                                          padding: EdgeInsets.only(left: 5),
+                                          child: DropdownButton(
+                                              underline: SizedBox(),
+                                              value: "KG",
+                                              items: [
+                                                DropdownMenuItem(
+                                                  child: Text("KG"),
+                                                  value: 'KG',
+                                                ),
+                                              ],
+                                              onChanged: (value) =>
+                                                  ingredient.unit = value),
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
@@ -361,21 +288,196 @@ class _CreateRecipeState extends State<CreateRecipe> {
                                 _popKey.currentState.save();
                                 setState(() {
                                   _recipe.ingredients.insert(0, ingredient);
-                                  _ingredients.insert(0, ingredient.name);
                                 });
                                 Navigator.of(context).pop();
                               },
-                              child: Text("Prueba"),
+                              child: Text(S.of(context).add),
                             )
                           ],
                         );
                       },
                     ),
-                    child: Text("Pop-up"),
+                    child: Text(S.of(context).add_ingredient),
                   ),
-                  MaterialButton(
-                    onPressed: () => sendData(),
-                    child: Text("Enviar"),
+                  Container(
+                    padding: EdgeInsets.only(top: 5),
+                    child: Wrap(
+                        children: _recipe.ingredients
+                            .map(
+                              (ingredient) => Padding(
+                                padding: EdgeInsets.only(right: 5, left: 5),
+                                child: Chip(
+                                  label: Text(ingredient.name),
+                                  deleteIcon: Icon(Icons.close),
+                                  padding: EdgeInsets.only(right: 5, left: 5),
+                                  onDeleted: () => setState(
+                                    () => _ingredients.remove(ingredient),
+                                  ),
+                                ),
+                              ),
+                            )
+                            .toList()),
+                  ),
+                  TextFormField(
+                    controller: stepController,
+                    decoration: InputDecoration(
+                      labelText: S.of(context).steps,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(5),
+                        ),
+                      ),
+                    ),
+                    onEditingComplete: () => setState(
+                      () => _recipe.tags.insert(0, stepController.text),
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(top: 5),
+                    child: Wrap(
+                      children: _recipe.tags
+                          .asMap()
+                          .entries
+                          .map(
+                            (entry) => Container(
+                              alignment: Alignment.topLeft,
+                              margin: EdgeInsets.only(top: 10),
+                              padding: EdgeInsets.only(
+                                  left: 20, right: 5, bottom: 15),
+                              decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: Colors.blue, width: 2),
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "${S.of(context).step} ${entry.key}",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Spacer(),
+                                      IconButton(
+                                        icon: Icon(Icons.close),
+                                        onPressed: () => setState(() =>
+                                            _recipe.tags.removeAt(entry.key)),
+                                      ),
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 10),
+                                    child: Text(entry.value),
+                                  )
+                                ],
+                              ),
+                            ),
+                          )
+                          .toList(),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Step(
+              isActive: _step == 2,
+              title: Text(S.of(context).nutritional_info),
+              content: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(top: 10),
+                    child: Row(
+                      children: [
+                        Flexible(
+                          child: Padding(
+                            padding: EdgeInsets.only(right: 5),
+                            child: TextFormField(
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                WhitelistingTextInputFormatter.digitsOnly,
+                              ],
+                              decoration: InputDecoration(
+                                labelText: S.of(context).calories,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(5),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Flexible(
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 5),
+                            child: TextFormField(
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                WhitelistingTextInputFormatter.digitsOnly,
+                              ],
+                              decoration: InputDecoration(
+                                labelText: S.of(context).proteins,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(5),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 10),
+                    child: Row(
+                      children: [
+                        Flexible(
+                          child: Padding(
+                            padding: EdgeInsets.only(right: 5),
+                            child: TextFormField(
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                WhitelistingTextInputFormatter.digitsOnly,
+                              ],
+                              decoration: InputDecoration(
+                                labelText: S.of(context).carbohydrate,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(5),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Flexible(
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 5),
+                            child: TextFormField(
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                WhitelistingTextInputFormatter.digitsOnly,
+                              ],
+                              decoration: InputDecoration(
+                                labelText: S.of(context).fat,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(5),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),

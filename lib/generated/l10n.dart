@@ -213,10 +213,10 @@ class S {
     );
   }
 
-  /// `Preparation`
+  /// `Preparation time`
   String get preparation_time {
     return Intl.message(
-      'Preparation',
+      'Preparation time',
       name: 'preparation_time',
       desc: '',
       args: [],
@@ -288,6 +288,86 @@ class S {
     return Intl.message(
       'Unit',
       name: 'unit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Camera`
+  String get camera {
+    return Intl.message(
+      'Camera',
+      name: 'camera',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Basic data`
+  String get basic_data {
+    return Intl.message(
+      'Basic data',
+      name: 'basic_data',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Details`
+  String get details {
+    return Intl.message(
+      'Details',
+      name: 'details',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nutritional information`
+  String get nutritional_info {
+    return Intl.message(
+      'Nutritional information',
+      name: 'nutritional_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add ingredient`
+  String get add_ingredient {
+    return Intl.message(
+      'Add ingredient',
+      name: 'add_ingredient',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add`
+  String get add {
+    return Intl.message(
+      'Add',
+      name: 'add',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Steps`
+  String get steps {
+    return Intl.message(
+      'Steps',
+      name: 'steps',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Step`
+  String get step {
+    return Intl.message(
+      'Step',
+      name: 'step',
       desc: '',
       args: [],
     );

@@ -17,12 +17,20 @@
   "carbohydrate": "Carbohydrate",
   "fat": "Fat",
   "difficulty": "Difficulty",
-  "preparation_time": "Preparation",
+  "preparation_time": "Preparation time",
   "tags": "Tags",
   "easy": "Easy",
   "average": "Average",
   "hard": "Hard",
   "title_validator": "Title cannot be empty",
   "quantity": "Quantity",
-  "unit": "Unit"
+  "unit": "Unit",
+  "camera": "Camera",
+  "basic_data": "Basic data",
+  "details": "Details",
+  "nutritional_info": "Nutritional information",
+  "add_ingredient": "Add ingredient",
+  "add": "Add",
+  "steps": "Steps",
+  "step": "Step"
 }
