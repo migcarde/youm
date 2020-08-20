@@ -26,11 +26,12 @@
   "quantity": "Quantity",
   "unit": "Unit",
   "camera": "Camera",
-  "basic_data": "Basic data",
+  "general_data": "General data",
   "details": "Details",
   "nutritional_info": "Nutritional information",
   "add_ingredient": "Add ingredient",
   "add": "Add",
   "steps": "Steps",
-  "step": "Step"
+  "step": "Step",
+  "field_required": "This field is required"
 }

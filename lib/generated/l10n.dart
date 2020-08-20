@@ -303,11 +303,11 @@ class S {
     );
   }
 
-  /// `Basic data`
-  String get basic_data {
+  /// `General data`
+  String get general_data {
     return Intl.message(
-      'Basic data',
-      name: 'basic_data',
+      'General data',
+      name: 'general_data',
       desc: '',
       args: [],
     );
@@ -368,6 +368,16 @@ class S {
     return Intl.message(
       'Step',
       name: 'step',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This field is required`
+  String get field_required {
+    return Intl.message(
+      'This field is required',
+      name: 'field_required',
       desc: '',
       args: [],
     );
