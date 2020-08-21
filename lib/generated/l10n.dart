@@ -382,6 +382,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Select an unit`
+  String get unit_required {
+    return Intl.message(
+      'Select an unit',
+      name: 'unit_required',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Kg`
+  String get kg {
+    return Intl.message(
+      'Kg',
+      name: 'kg',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

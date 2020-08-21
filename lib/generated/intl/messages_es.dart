@@ -40,6 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "general_data" : MessageLookupByLibrary.simpleMessage("Datos generales"),
     "hard" : MessageLookupByLibrary.simpleMessage("Difícil"),
     "ingredients" : MessageLookupByLibrary.simpleMessage("Ingredientes"),
+    "kg" : MessageLookupByLibrary.simpleMessage("kg"),
     "nutritional_info" : MessageLookupByLibrary.simpleMessage("Información nutricional"),
     "picture" : MessageLookupByLibrary.simpleMessage("Imagen"),
     "preparation" : MessageLookupByLibrary.simpleMessage("Preparación"),
@@ -55,6 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "title" : MessageLookupByLibrary.simpleMessage("Título"),
     "title_validator" : MessageLookupByLibrary.simpleMessage("El título no puede estar vacío"),
     "unit" : MessageLookupByLibrary.simpleMessage("Unidad"),
+    "unit_required" : MessageLookupByLibrary.simpleMessage("Seleccione una unidad"),
     "wall" : MessageLookupByLibrary.simpleMessage("Muro")
   };
 }

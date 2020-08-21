@@ -33,5 +33,7 @@
   "add": "Add",
   "steps": "Steps",
   "step": "Step",
-  "field_required": "This field is required"
+  "field_required": "This field is required",
+  "unit_required": "Select an unit",
+  "kg": "Kg"
 }

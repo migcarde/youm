@@ -33,5 +33,7 @@
     "add": "Añadir",
     "steps": "Pasos",
     "step": "Paso",
-    "field_required": "Este campo es obligatorio"
+    "field_required": "Este campo es obligatorio",
+    "unit_required": "Seleccione una unidad",
+    "kg": "kg"
   }

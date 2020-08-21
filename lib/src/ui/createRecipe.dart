@@ -18,7 +18,9 @@ class _CreateRecipeState extends State<CreateRecipe> {
   final _detailsFormKey = GlobalKey<FormState>();
   final _popKey = GlobalKey<FormState>();
   int _step = 0;
-  String _value = 'EASY';
+  bool imageError = false;
+  bool ingredientError = false;
+  bool stepsError = false;
   PickedFile _image;
   var _ingredients = List<String>();
   final picker = ImagePicker();
@@ -28,7 +30,10 @@ class _CreateRecipeState extends State<CreateRecipe> {
   Future getImage() async {
     final pickedImage = await picker.getImage(source: ImageSource.gallery);
 
-    setState(() => _image = pickedImage);
+    setState(() {
+      _image = pickedImage;
+      imageError = false;
+    });
   }
 
   @override
@@ -42,15 +47,22 @@ class _CreateRecipeState extends State<CreateRecipe> {
           currentStep: _step,
           onStepContinue: () {
             if (_step == 0) {
-              if (_generalFormKey.currentState.validate()) {
+              imageError = _image == null;
+              if (_generalFormKey.currentState.validate() && !imageError) {
                 _generalFormKey.currentState.save();
-                setState(() => _step++);
+                _step++;
               }
+              setState(() {});
             } else if (_step == 1) {
-              if (_detailsFormKey.currentState.validate()) {
+              ingredientError = _recipe.ingredients.isEmpty;
+              stepsError = _recipe.tags.isEmpty;
+              if (_detailsFormKey.currentState.validate() &&
+                  !ingredientError &&
+                  !stepsError) {
                 _detailsFormKey.currentState.save();
-                setState(() => _step++);
+                _step++;
               }
+              setState(() {});
             } else {}
           },
           onStepCancel: () {
@@ -83,10 +95,38 @@ class _CreateRecipeState extends State<CreateRecipe> {
                             ),
                           )
                         : InkWell(
-                            child: Image.file(File(_image.path),
-                                height: 250, fit: BoxFit.cover),
                             onTap: () => getImage(),
+                            child: Stack(
+                              fit: StackFit.passthrough,
+                              children: [
+                                Image.file(File(_image.path),
+                                    height: 250, fit: BoxFit.cover),
+                                Align(
+                                  alignment: Alignment.topRight,
+                                  child: Container(
+                                    padding: EdgeInsets.all(2),
+                                    margin: EdgeInsets.only(top: 10, right: 10),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(50),
+                                      border: Border.all(
+                                          width: 1, color: Colors.transparent),
+                                    ),
+                                    child: Icon(Icons.edit),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
+                    imageError
+                        ? Padding(
+                            padding: EdgeInsets.only(top: 10, left: 10),
+                            child: Text(
+                              S.of(context).field_required,
+                              style: TextStyle(color: Colors.red),
+                            ),
+                          )
+                        : Container(),
                     Padding(
                       padding: EdgeInsets.only(top: 10),
                       child: TextFormField(
@@ -179,8 +219,12 @@ class _CreateRecipeState extends State<CreateRecipe> {
                               ),
                               child: DropdownButton(
                                 underline: SizedBox(),
-                                value: _value,
+                                value: _recipe.difficulty,
                                 items: [
+                                  DropdownMenuItem(
+                                    child: Text(S.of(context).difficulty),
+                                    value: null,
+                                  ),
                                   DropdownMenuItem(
                                     child: Text(S.of(context).easy),
                                     value: 'EASY',
@@ -195,7 +239,6 @@ class _CreateRecipeState extends State<CreateRecipe> {
                                   ),
                                 ],
                                 onChanged: (value) => setState(() {
-                                  _value = value;
                                   _recipe.difficulty = value;
                                 }),
                               ),
@@ -237,6 +280,7 @@ class _CreateRecipeState extends State<CreateRecipe> {
                           context: context,
                           builder: (context) {
                             var ingredient = IngredientForCreationDTO.create();
+                            bool unitError = false;
                             return AlertDialog(
                               title: Text(S.of(context).add_ingredient),
                               content: Form(
@@ -273,12 +317,18 @@ class _CreateRecipeState extends State<CreateRecipe> {
                                               padding:
                                                   EdgeInsets.only(right: 5),
                                               child: TextFormField(
-                                                validator: (value) =>
-                                                    value.length == 0
-                                                        ? S
-                                                            .of(context)
-                                                            .field_required
-                                                        : null,
+                                                validator: (value) {
+                                                  if (value.length == 0) {
+                                                    return S
+                                                        .of(context)
+                                                        .field_required;
+                                                  } else if (ingredient.unit ==
+                                                      null) {
+                                                    return S
+                                                        .of(context)
+                                                        .unit_required;
+                                                  }
+                                                },
                                                 keyboardType:
                                                     TextInputType.number,
                                                 inputFormatters: [
@@ -309,10 +359,16 @@ class _CreateRecipeState extends State<CreateRecipe> {
                                               padding: EdgeInsets.only(left: 5),
                                               child: DropdownButton(
                                                   underline: SizedBox(),
-                                                  value: "KG",
+                                                  value: ingredient.unit,
                                                   items: [
                                                     DropdownMenuItem(
-                                                      child: Text("KG"),
+                                                      child: Text(
+                                                          S.of(context).unit),
+                                                      value: null,
+                                                    ),
+                                                    DropdownMenuItem(
+                                                      child: Text(
+                                                          S.of(context).kg),
                                                       value: 'KG',
                                                     ),
                                                   ],
@@ -330,13 +386,14 @@ class _CreateRecipeState extends State<CreateRecipe> {
                                 MaterialButton(
                                   onPressed: () {
                                     _popKey.currentState.save();
-                                    if (_popKey.currentState.validate()) {
-                                      setState(() {
-                                        _recipe.ingredients
-                                            .insert(0, ingredient);
-                                      });
+                                    unitError = ingredient.unit == null;
+                                    if (_popKey.currentState.validate() &&
+                                        !unitError) {
+                                      ingredientError = false;
+                                      _recipe.ingredients.insert(0, ingredient);
                                       Navigator.of(context).pop();
                                     }
+                                    setState(() {});
                                   },
                                   child: Text(S.of(context).add),
                                 )
@@ -347,6 +404,15 @@ class _CreateRecipeState extends State<CreateRecipe> {
                         label: Text(S.of(context).add_ingredient),
                       ),
                     ),
+                    ingredientError
+                        ? Padding(
+                            padding: EdgeInsets.only(top: 10, left: 10),
+                            child: Text(
+                              S.of(context).field_required,
+                              style: TextStyle(color: Colors.red),
+                            ),
+                          )
+                        : Container(),
                     Container(
                       padding: EdgeInsets.only(top: 10),
                       child: Wrap(
@@ -377,9 +443,21 @@ class _CreateRecipeState extends State<CreateRecipe> {
                         ),
                       ),
                       onEditingComplete: () => setState(
-                        () => _recipe.tags.insert(0, stepController.text),
+                        () {
+                          stepsError = false;
+                          _recipe.tags.insert(0, stepController.text);
+                        },
                       ),
                     ),
+                    stepsError
+                        ? Padding(
+                            padding: EdgeInsets.only(top: 10, left: 10),
+                            child: Text(
+                              S.of(context).field_required,
+                              style: TextStyle(color: Colors.red),
+                            ),
+                          )
+                        : Container(),
                     Container(
                       padding: EdgeInsets.only(top: 5),
                       child: Wrap(

@@ -40,6 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "general_data" : MessageLookupByLibrary.simpleMessage("General data"),
     "hard" : MessageLookupByLibrary.simpleMessage("Hard"),
     "ingredients" : MessageLookupByLibrary.simpleMessage("Ingredients"),
+    "kg" : MessageLookupByLibrary.simpleMessage("Kg"),
     "nutritional_info" : MessageLookupByLibrary.simpleMessage("Nutritional information"),
     "picture" : MessageLookupByLibrary.simpleMessage("Image"),
     "preparation" : MessageLookupByLibrary.simpleMessage("Preparation"),
@@ -55,6 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "title" : MessageLookupByLibrary.simpleMessage("Title"),
     "title_validator" : MessageLookupByLibrary.simpleMessage("Title cannot be empty"),
     "unit" : MessageLookupByLibrary.simpleMessage("Unit"),
+    "unit_required" : MessageLookupByLibrary.simpleMessage("Select an unit"),
     "wall" : MessageLookupByLibrary.simpleMessage("Wall")
   };
 }
