@@ -35,7 +35,8 @@ class RecipesList extends StatelessWidget {
     var scrollController = ScrollController();
     scrollController.addListener(() {
       if (scrollController.position.maxScrollExtent ==
-          scrollController.position.pixels) {
+              scrollController.position.pixels &&
+          recipes.currentPage < recipes.totalPages) {
         bloc.fetchAllRecipes(page: recipes.currentPage + 1);
       }
     });
