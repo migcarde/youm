@@ -358,22 +358,24 @@ class _CreateRecipeState extends State<CreateRecipe> {
                                             child: Padding(
                                               padding: EdgeInsets.only(left: 5),
                                               child: DropdownButton(
-                                                  underline: SizedBox(),
-                                                  value: ingredient.unit,
-                                                  items: [
-                                                    DropdownMenuItem(
-                                                      child: Text(
-                                                          S.of(context).unit),
-                                                      value: null,
-                                                    ),
-                                                    DropdownMenuItem(
-                                                      child: Text(
-                                                          S.of(context).kg),
-                                                      value: 'KG',
-                                                    ),
-                                                  ],
-                                                  onChanged: (value) =>
-                                                      ingredient.unit = value),
+                                                underline: SizedBox(),
+                                                value: ingredient.unit,
+                                                items: [
+                                                  DropdownMenuItem(
+                                                    child: Text(
+                                                        S.of(context).unit),
+                                                    value: null,
+                                                  ),
+                                                  DropdownMenuItem(
+                                                    child:
+                                                        Text(S.of(context).kg),
+                                                    value: 'KG',
+                                                  ),
+                                                ],
+                                                onChanged: (value) => setState(
+                                                    () => ingredient.unit =
+                                                        value),
+                                              ),
                                             ),
                                           ),
                                         ],
