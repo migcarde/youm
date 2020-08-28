@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
@@ -63,7 +64,9 @@ class _CreateRecipeState extends State<CreateRecipe> {
                 _step++;
               }
               setState(() {});
-            } else {}
+            } else if (_step == 2) {
+              sendData();
+            }
           },
           onStepCancel: () {
             if (_step > 0 && _step < 3) {
@@ -623,22 +626,37 @@ class _CreateRecipeState extends State<CreateRecipe> {
     if (form.validate()) {
       form.save();
     }
-    bloc.createRecipe(_recipe);
-    StreamBuilder(
-      stream: bloc.postedRecipe,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          var snackbar = SnackBar(
-            content: Text("Todo bien"),
-          );
-          Scaffold.of(context).showSnackBar(snackbar);
-        } else {
-          var snackbar = SnackBar(
-            content: Text("Todo mal"),
-          );
-          Scaffold.of(context).showSnackBar(snackbar);
-        }
-      },
-    );
+    uploadFile();
+  }
+
+  Future uploadFile() async {
+    StorageReference storageReference =
+        FirebaseStorage.instance.ref().child('recipes/${_image.path}');
+    StorageUploadTask uploadTask = storageReference.putFile(File(_image.path));
+    await uploadTask.onComplete;
+    storageReference.getDownloadURL().then(
+          (value) => setState(
+            () {
+              _recipe.picture = value;
+              bloc.createRecipe(_recipe);
+              StreamBuilder(
+                stream: bloc.postedRecipe,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    var snackbar = SnackBar(
+                      content: Text("Todo bien"),
+                    );
+                    Scaffold.of(context).showSnackBar(snackbar);
+                  } else {
+                    var snackbar = SnackBar(
+                      content: Text("Todo mal"),
+                    );
+                    Scaffold.of(context).showSnackBar(snackbar);
+                  }
+                },
+              );
+            },
+          ),
+        );
   }
 }
