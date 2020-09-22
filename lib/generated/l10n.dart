@@ -112,6 +112,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Easy`
+  String get easy {
+    return Intl.message(
+      'Easy',
+      name: 'easy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Average`
+  String get average {
+    return Intl.message(
+      'Average',
+      name: 'average',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hard`
+  String get hard {
+    return Intl.message(
+      'Hard',
+      name: 'hard',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rations`
+  String get rations {
+    return Intl.message(
+      'Rations',
+      name: 'rations',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

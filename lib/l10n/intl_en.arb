@@ -6,5 +6,9 @@
   "diet": "Diet",
   "favorites": "Favorites",
   "shopping_list": "Cart",
-  "wall": "Wall"
+  "wall": "Wall",
+  "easy": "Easy",
+  "average": "Average",
+  "hard": "Hard",
+  "rations": "Rations"
 }

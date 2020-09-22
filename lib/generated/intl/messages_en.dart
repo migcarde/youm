@@ -21,10 +21,14 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "average" : MessageLookupByLibrary.simpleMessage("Average"),
     "diet" : MessageLookupByLibrary.simpleMessage("Diet"),
+    "easy" : MessageLookupByLibrary.simpleMessage("Easy"),
     "favorites" : MessageLookupByLibrary.simpleMessage("Favorites"),
+    "hard" : MessageLookupByLibrary.simpleMessage("Hard"),
     "ingredients" : MessageLookupByLibrary.simpleMessage("Ingredients"),
     "preparation" : MessageLookupByLibrary.simpleMessage("Preparation"),
+    "rations" : MessageLookupByLibrary.simpleMessage("Rations"),
     "recipes" : MessageLookupByLibrary.simpleMessage("Recetas"),
     "shopping_list" : MessageLookupByLibrary.simpleMessage("Cart"),
     "title" : MessageLookupByLibrary.simpleMessage("Youm!"),

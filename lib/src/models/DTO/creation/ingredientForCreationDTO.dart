@@ -1,6 +1,6 @@
 class IngredientForCreationDTO {
   String name;
-  String quantity;
+  int quantity;
 
   IngredientForCreationDTO({this.name, this.quantity});
 

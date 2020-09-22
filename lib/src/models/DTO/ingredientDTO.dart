@@ -1,7 +1,7 @@
 class IngredientDTO {
   String id;
   String name;
-  String quantity;
+  int quantity;
 
   IngredientDTO({this.id, this.name, this.quantity});
 

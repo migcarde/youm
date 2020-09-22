@@ -6,5 +6,9 @@
     "diet": "Dieta",
     "favorites": "Favoritos",
     "shopping_list": "Carro",
-    "wall": "Muro"
+    "wall": "Muro",
+    "easy": "Fácil",
+    "average": "Normal",
+    "hard": "Difícil",
+    "rations": "Raciones"
   }
