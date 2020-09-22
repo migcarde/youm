@@ -23,7 +23,7 @@ class RecipesList extends StatelessWidget {
           }
           return buildPagedList(recipes);
         } else if (snapshot.hasError) {
-          return Text(snapshot.error.toString());
+          return Center(child: Text(snapshot.error.toString()));
         }
         return Center(
           child: CircularProgressIndicator(),

@@ -11,8 +11,12 @@ class RecipesBloc {
   Stream<PagedList> get allRecipes => recipesFetcher.stream;
 
   fetchAllRecipes({int page = 1}) async {
-    PagedList recipes = await repository.fetchAllRecipes(page: page);
-    recipesFetcher.sink.add(recipes);
+    try {
+      PagedList recipes = await repository.fetchAllRecipes(page: page);
+      recipesFetcher.sink.add(recipes);
+    } catch (e) {
+      recipesFetcher.sink.addError(e);
+    }
   }
 
   dispose() {
