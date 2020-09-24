@@ -152,6 +152,56 @@ class S {
       args: [],
     );
   }
+
+  /// `You don't have internet o this moment. Please, try again later`
+  String get socketException {
+    return Intl.message(
+      'You don\'t have internet o this moment. Please, try again later',
+      name: 'socketException',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{object} not found`
+  String notFoundException(Object object) {
+    return Intl.message(
+      '$object not found',
+      name: 'notFoundException',
+      desc: '',
+      args: [object],
+    );
+  }
+
+  /// `{list} is empty`
+  String emptyException(Object list) {
+    return Intl.message(
+      '$list is empty',
+      name: 'emptyException',
+      desc: '',
+      args: [list],
+    );
+  }
+
+  /// `An unexcepted error was ocurred. Please, try again later`
+  String get unknowException {
+    return Intl.message(
+      'An unexcepted error was ocurred. Please, try again later',
+      name: 'unknowException',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The request has not been filled correctly. Please, check data`
+  String get formatException {
+    return Intl.message(
+      'The request has not been filled correctly. Please, check data',
+      name: 'formatException',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

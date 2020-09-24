@@ -10,5 +10,10 @@
   "easy": "Easy",
   "average": "Average",
   "hard": "Hard",
-  "rations": "Rations"
+  "rations": "Rations",
+  "socketException": "You don't have internet o this moment. Please, try again later",
+  "notFoundException": "{object} not found",
+  "emptyException": "{list} is empty",
+  "unknowException": "An unexcepted error was ocurred. Please, try again later",
+  "formatException": "The request has not been filled correctly. Please, check data"
 }

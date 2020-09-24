@@ -10,5 +10,10 @@
     "easy": "Fácil",
     "average": "Normal",
     "hard": "Difícil",
-    "rations": "Raciones"
+    "rations": "Raciones",
+    "socketException": "No tienes conexión a internet en este momento. Por favor, inténtelo más tarde",
+    "notFoundException": "{object} no encontrado",
+    "emptyException": "{list} está vacía",
+    "unknowException": "Ha ocurrido un error inesperado. Por favor, inténtelo más tarde",
+    "formatException": "La petición no se ha realizado correctamente. Por favor, revise los datos enviados"
   }

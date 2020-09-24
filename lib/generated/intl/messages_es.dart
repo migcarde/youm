@@ -19,19 +19,28 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'es';
 
+  static m0(list) => "${list} está vacía";
+
+  static m1(object) => "${object} no encontrado";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "average" : MessageLookupByLibrary.simpleMessage("Normal"),
     "diet" : MessageLookupByLibrary.simpleMessage("Dieta"),
     "easy" : MessageLookupByLibrary.simpleMessage("Fácil"),
+    "emptyException" : m0,
     "favorites" : MessageLookupByLibrary.simpleMessage("Favoritos"),
+    "formatException" : MessageLookupByLibrary.simpleMessage("La petición no se ha realizado correctamente. Por favor, revise los datos enviados"),
     "hard" : MessageLookupByLibrary.simpleMessage("Difícil"),
     "ingredients" : MessageLookupByLibrary.simpleMessage("Ingredientes"),
+    "notFoundException" : m1,
     "preparation" : MessageLookupByLibrary.simpleMessage("Preparación"),
     "rations" : MessageLookupByLibrary.simpleMessage("Raciones"),
     "recipes" : MessageLookupByLibrary.simpleMessage("Recetas"),
     "shopping_list" : MessageLookupByLibrary.simpleMessage("Carro"),
+    "socketException" : MessageLookupByLibrary.simpleMessage("No tienes conexión a internet en este momento. Por favor, inténtelo más tarde"),
     "title" : MessageLookupByLibrary.simpleMessage("Youm!"),
+    "unknowException" : MessageLookupByLibrary.simpleMessage("Ha ocurrido un error inesperado. Por favor, inténtelo más tarde"),
     "wall" : MessageLookupByLibrary.simpleMessage("Muro")
   };
 }

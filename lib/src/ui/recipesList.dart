@@ -8,7 +8,7 @@ import 'package:youm/src/models/pagedList.dart';
 class RecipesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    bloc.fetchAllRecipes();
+    bloc.fetchAllRecipes(context);
     PagedList<RecipeDTO> recipes;
 
     return StreamBuilder(
@@ -21,7 +21,7 @@ class RecipesList extends StatelessWidget {
           } else {
             recipes.items.addAll(data.items);
           }
-          return buildPagedList(recipes);
+          return buildPagedList(context, recipes);
         } else if (snapshot.hasError) {
           return Center(child: Text(snapshot.error.toString()));
         }
@@ -32,13 +32,13 @@ class RecipesList extends StatelessWidget {
     );
   }
 
-  Widget buildPagedList(PagedList<RecipeDTO> recipes) {
+  Widget buildPagedList(BuildContext context, PagedList<RecipeDTO> recipes) {
     var scrollController = ScrollController();
     scrollController.addListener(() {
       if (scrollController.position.maxScrollExtent ==
               scrollController.position.pixels &&
           recipes.currentPage < recipes.totalPages) {
-        bloc.fetchAllRecipes(page: recipes.currentPage + 1);
+        bloc.fetchAllRecipes(context, page: recipes.currentPage + 1);
       }
     });
 

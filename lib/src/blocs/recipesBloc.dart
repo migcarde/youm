@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:youm/src/models/pagedList.dart';
 import 'package:youm/src/resources/recipeRepository.dart';
@@ -10,9 +11,9 @@ class RecipesBloc {
 
   Stream<PagedList> get allRecipes => recipesFetcher.stream;
 
-  fetchAllRecipes({int page = 1}) async {
+  fetchAllRecipes(BuildContext context, {int page = 1}) async {
     try {
-      PagedList recipes = await repository.fetchAllRecipes(page: page);
+      PagedList recipes = await repository.fetchAllRecipes(context, page: page);
       recipesFetcher.sink.add(recipes);
     } catch (e) {
       recipesFetcher.sink.addError(e);
