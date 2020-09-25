@@ -233,36 +233,6 @@ class S {
     );
   }
 
-  /// `Easy`
-  String get easy {
-    return Intl.message(
-      'Easy',
-      name: 'easy',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Average`
-  String get average {
-    return Intl.message(
-      'Average',
-      name: 'average',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Hard`
-  String get hard {
-    return Intl.message(
-      'Hard',
-      name: 'hard',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Title cannot be empty`
   String get title_validator {
     return Intl.message(
@@ -398,6 +368,96 @@ class S {
     return Intl.message(
       'Kg',
       name: 'kg',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Easy`
+  String get easy {
+    return Intl.message(
+      'Easy',
+      name: 'easy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Average`
+  String get average {
+    return Intl.message(
+      'Average',
+      name: 'average',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hard`
+  String get hard {
+    return Intl.message(
+      'Hard',
+      name: 'hard',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rations`
+  String get rations {
+    return Intl.message(
+      'Rations',
+      name: 'rations',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You don't have internet o this moment. Please, try again later`
+  String get socketException {
+    return Intl.message(
+      'You don\'t have internet o this moment. Please, try again later',
+      name: 'socketException',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{object} not found`
+  String notFoundException(Object object) {
+    return Intl.message(
+      '$object not found',
+      name: 'notFoundException',
+      desc: '',
+      args: [object],
+    );
+  }
+
+  /// `{list} is empty`
+  String emptyException(Object list) {
+    return Intl.message(
+      '$list is empty',
+      name: 'emptyException',
+      desc: '',
+      args: [list],
+    );
+  }
+
+  /// `An unexcepted error was ocurred. Please, try again later`
+  String get unknowException {
+    return Intl.message(
+      'An unexcepted error was ocurred. Please, try again later',
+      name: 'unknowException',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The request has not been filled correctly. Please, check data`
+  String get formatException {
+    return Intl.message(
+      'The request has not been filled correctly. Please, check data',
+      name: 'formatException',
       desc: '',
       args: [],
     );

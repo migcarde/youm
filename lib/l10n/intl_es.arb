@@ -19,9 +19,6 @@
     "difficulty": "Dificultad",
     "preparation_time": "Tiempo de preparación",
     "tags": "Etiquetas",
-    "easy": "Fácil",
-    "average": "Normal",
-    "hard": "Difícil",
     "title_validator": "El título no puede estar vacío",
     "quantity": "Cantidad",
     "unit": "Unidad",
@@ -35,5 +32,14 @@
     "step": "Paso",
     "field_required": "Este campo es obligatorio",
     "unit_required": "Seleccione una unidad",
-    "kg": "kg"
+    "kg": "kg",
+    "easy": "Fácil",
+    "average": "Normal",
+    "hard": "Difícil",
+    "rations": "Raciones",
+    "socketException": "No tienes conexión a internet en este momento. Por favor, inténtelo más tarde",
+    "notFoundException": "{object} no encontrado",
+    "emptyException": "{list} está vacía",
+    "unknowException": "Ha ocurrido un error inesperado. Por favor, inténtelo más tarde",
+    "formatException": "La petición no se ha realizado correctamente. Por favor, revise los datos enviados"
   }

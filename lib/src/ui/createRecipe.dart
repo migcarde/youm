@@ -6,8 +6,9 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:youm/generated/l10n.dart';
 import 'package:youm/src/blocs/recipesBloc.dart';
-import 'package:youm/src/models/DTO/IngredientForCreationDTO.dart';
-import 'package:youm/src/models/DTO/recipeForCreationDTO.dart';
+import 'package:youm/src/models/DTO/creation/ingredientForCreationDTO.dart';
+import 'package:youm/src/models/DTO/creation/recipeForCreationDTO.dart';
+import 'package:youm/src/models/DTO/creation/tagForCreationDTO.dart';
 
 class CreateRecipe extends StatefulWidget {
   @override
@@ -56,7 +57,7 @@ class _CreateRecipeState extends State<CreateRecipe> {
               setState(() {});
             } else if (_step == 1) {
               ingredientError = _recipe.ingredients.isEmpty;
-              stepsError = _recipe.tags.isEmpty;
+              stepsError = _recipe.directions.isEmpty;
               if (_detailsFormKey.currentState.validate() &&
                   !ingredientError &&
                   !stepsError) {
@@ -197,7 +198,7 @@ class _CreateRecipeState extends State<CreateRecipe> {
                                     : null,
                                 keyboardType: TextInputType.number,
                                 inputFormatters: [
-                                  WhitelistingTextInputFormatter.digitsOnly,
+                                  FilteringTextInputFormatter.digitsOnly,
                                 ],
                                 decoration: InputDecoration(
                                   labelText: S.of(context).quantity,
@@ -258,8 +259,9 @@ class _CreateRecipeState extends State<CreateRecipe> {
                             : null,
                         keyboardType: TextInputType.number,
                         inputFormatters: [
-                          WhitelistingTextInputFormatter.digitsOnly,
+                          FilteringTextInputFormatter.digitsOnly,
                         ],
+                        onSaved: (value) => _recipe.time = value,
                         decoration: InputDecoration(
                           labelText: S.of(context).preparation_time,
                           border: OutlineInputBorder(
@@ -335,7 +337,7 @@ class _CreateRecipeState extends State<CreateRecipe> {
                                                 keyboardType:
                                                     TextInputType.number,
                                                 inputFormatters: [
-                                                  WhitelistingTextInputFormatter
+                                                  FilteringTextInputFormatter
                                                       .digitsOnly,
                                                 ],
                                                 decoration: InputDecoration(
@@ -450,7 +452,7 @@ class _CreateRecipeState extends State<CreateRecipe> {
                       onEditingComplete: () => setState(
                         () {
                           stepsError = false;
-                          _recipe.tags.insert(0, stepController.text);
+                          _recipe.directions.insert(0, stepController.text);
                         },
                       ),
                     ),
@@ -466,7 +468,7 @@ class _CreateRecipeState extends State<CreateRecipe> {
                     Container(
                       padding: EdgeInsets.only(top: 5),
                       child: Wrap(
-                        children: _recipe.tags
+                        children: _recipe.directions
                             .asMap()
                             .entries
                             .map(
@@ -532,7 +534,7 @@ class _CreateRecipeState extends State<CreateRecipe> {
                             child: TextFormField(
                               keyboardType: TextInputType.number,
                               inputFormatters: [
-                                WhitelistingTextInputFormatter.digitsOnly,
+                                FilteringTextInputFormatter.digitsOnly,
                               ],
                               decoration: InputDecoration(
                                 labelText: S.of(context).calories,
@@ -551,7 +553,7 @@ class _CreateRecipeState extends State<CreateRecipe> {
                             child: TextFormField(
                               keyboardType: TextInputType.number,
                               inputFormatters: [
-                                WhitelistingTextInputFormatter.digitsOnly,
+                                FilteringTextInputFormatter.digitsOnly,
                               ],
                               decoration: InputDecoration(
                                 labelText: S.of(context).proteins,
@@ -577,7 +579,7 @@ class _CreateRecipeState extends State<CreateRecipe> {
                             child: TextFormField(
                               keyboardType: TextInputType.number,
                               inputFormatters: [
-                                WhitelistingTextInputFormatter.digitsOnly,
+                                FilteringTextInputFormatter.digitsOnly,
                               ],
                               decoration: InputDecoration(
                                 labelText: S.of(context).carbohydrate,
@@ -596,7 +598,7 @@ class _CreateRecipeState extends State<CreateRecipe> {
                             child: TextFormField(
                               keyboardType: TextInputType.number,
                               inputFormatters: [
-                                WhitelistingTextInputFormatter.digitsOnly,
+                                FilteringTextInputFormatter.digitsOnly,
                               ],
                               decoration: InputDecoration(
                                 labelText: S.of(context).fat,

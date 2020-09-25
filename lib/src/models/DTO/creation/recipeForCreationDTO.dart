@@ -1,4 +1,5 @@
-import 'package:youm/src/models/DTO/IngredientForCreationDTO.dart';
+import 'package:youm/src/models/DTO/creation/ingredientForCreationDTO.dart';
+import 'package:youm/src/models/DTO/creation/tagForCreationDTO.dart';
 
 class RecipeForCreationDTO {
   String title;
@@ -9,39 +10,43 @@ class RecipeForCreationDTO {
   double proteins = 0;
   double carbohydrate = 0;
   double fat = 0;
+  double rating = 0;
   String difficulty;
-  double time = 0;
+  String time;
   List<IngredientForCreationDTO> ingredients = List<IngredientForCreationDTO>();
-  List<String> tags = List<String>();
+  List<TagForCreationDTO> tags = List<TagForCreationDTO>();
+  List<String> directions = List<String>();
 
   RecipeForCreationDTO(
-      this.title,
+      {this.title,
       this.description,
-      this.ingredients,
-      this.picture,
       this.quantity,
       this.calories,
       this.proteins,
       this.carbohydrate,
       this.fat,
+      this.rating,
       this.difficulty,
       this.time,
-      this.tags);
+      this.ingredients,
+      this.tags,
+      this.directions});
 
   RecipeForCreationDTO.create();
 
-  Map<String, dynamic> toJson() => <String, dynamic>{
+  Map<String, dynamic> toJson() => {
         'title': title,
         'description': description,
-        'picture': picture,
         'quantity': quantity,
         'calories': calories,
         'proteins': proteins,
         'carbohydrate': carbohydrate,
         'fat': fat,
+        'rating': rating,
         'difficulty': difficulty,
         'time': time,
         'ingredients': ingredients,
-        'tags': tags
+        'tags': tags,
+        'directions': directions
       };
 }

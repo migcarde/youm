@@ -19,6 +19,10 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static m0(list) => "${list} is empty";
+
+  static m1(object) => "${object} not found";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "add" : MessageLookupByLibrary.simpleMessage("Add"),
@@ -34,13 +38,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "diet" : MessageLookupByLibrary.simpleMessage("Diet"),
     "difficulty" : MessageLookupByLibrary.simpleMessage("Difficulty"),
     "easy" : MessageLookupByLibrary.simpleMessage("Easy"),
+    "emptyException" : m0,
     "fat" : MessageLookupByLibrary.simpleMessage("Fat"),
     "favorites" : MessageLookupByLibrary.simpleMessage("Favorites"),
     "field_required" : MessageLookupByLibrary.simpleMessage("This field is required"),
+    "formatException" : MessageLookupByLibrary.simpleMessage("The request has not been filled correctly. Please, check data"),
     "general_data" : MessageLookupByLibrary.simpleMessage("General data"),
     "hard" : MessageLookupByLibrary.simpleMessage("Hard"),
     "ingredients" : MessageLookupByLibrary.simpleMessage("Ingredients"),
     "kg" : MessageLookupByLibrary.simpleMessage("Kg"),
+    "notFoundException" : m1,
     "nutritional_info" : MessageLookupByLibrary.simpleMessage("Nutritional information"),
     "picture" : MessageLookupByLibrary.simpleMessage("Image"),
     "preparation" : MessageLookupByLibrary.simpleMessage("Preparation"),
@@ -48,8 +55,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "proteins" : MessageLookupByLibrary.simpleMessage("Proteins"),
     "quantity" : MessageLookupByLibrary.simpleMessage("Quantity"),
     "ration" : MessageLookupByLibrary.simpleMessage("Ration"),
+    "rations" : MessageLookupByLibrary.simpleMessage("Rations"),
     "recipes" : MessageLookupByLibrary.simpleMessage("Recetas"),
     "shopping_list" : MessageLookupByLibrary.simpleMessage("Cart"),
+    "socketException" : MessageLookupByLibrary.simpleMessage("You don\'t have internet o this moment. Please, try again later"),
     "step" : MessageLookupByLibrary.simpleMessage("Step"),
     "steps" : MessageLookupByLibrary.simpleMessage("Steps"),
     "tags" : MessageLookupByLibrary.simpleMessage("Tags"),
@@ -57,6 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "title_validator" : MessageLookupByLibrary.simpleMessage("Title cannot be empty"),
     "unit" : MessageLookupByLibrary.simpleMessage("Unit"),
     "unit_required" : MessageLookupByLibrary.simpleMessage("Select an unit"),
+    "unknowException" : MessageLookupByLibrary.simpleMessage("An unexcepted error was ocurred. Please, try again later"),
     "wall" : MessageLookupByLibrary.simpleMessage("Wall")
   };
 }

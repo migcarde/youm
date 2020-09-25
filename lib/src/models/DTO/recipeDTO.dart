@@ -1,4 +1,4 @@
-import 'package:youm/src/models/DTO/IngredientDTO.dart';
+import 'package:youm/src/models/DTO/ingredientDTO.dart';
 import 'package:youm/src/models/DTO/tagDTO.dart';
 
 class RecipeDTO {
@@ -13,7 +13,7 @@ class RecipeDTO {
   double fat;
   double rating;
   String difficulty;
-  double time;
+  String time;
   List<IngredientDTO> ingredients;
   List<TagDTO> tags;
 
@@ -46,7 +46,7 @@ class RecipeDTO {
         fat: json['fat'].toDouble(),
         rating: json['rating'].toDouble(),
         difficulty: json['difficulty'],
-        time: json['time'].toDouble(),
+        time: json['time'],
         ingredients: json['ingredients']
             .map<IngredientDTO>((model) => IngredientDTO.fromJson(model))
             .toList(),

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:youm/generated/l10n.dart';
 import 'package:youm/src/blocs/recipesBloc.dart';
 import 'package:youm/src/models/DTO/recipeDTO.dart';
 import 'package:youm/src/models/pagedList.dart';
@@ -7,7 +8,7 @@ import 'package:youm/src/models/pagedList.dart';
 class RecipesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    bloc.fetchAllRecipes();
+    bloc.fetchAllRecipes(context);
     PagedList<RecipeDTO> recipes;
 
     return StreamBuilder(
@@ -20,9 +21,9 @@ class RecipesList extends StatelessWidget {
           } else {
             recipes.items.addAll(data.items);
           }
-          return buildPagedList(recipes);
+          return buildPagedList(context, recipes);
         } else if (snapshot.hasError) {
-          return Text(snapshot.error.toString());
+          return Center(child: Text(snapshot.error.toString()));
         }
         return Center(
           child: CircularProgressIndicator(),
@@ -31,12 +32,13 @@ class RecipesList extends StatelessWidget {
     );
   }
 
-  Widget buildPagedList(PagedList<RecipeDTO> recipes) {
+  Widget buildPagedList(BuildContext context, PagedList<RecipeDTO> recipes) {
     var scrollController = ScrollController();
     scrollController.addListener(() {
       if (scrollController.position.maxScrollExtent ==
-          scrollController.position.pixels) {
-        bloc.fetchAllRecipes(page: recipes.currentPage + 1);
+              scrollController.position.pixels &&
+          recipes.currentPage < recipes.totalPages) {
+        bloc.fetchAllRecipes(context, page: recipes.currentPage + 1);
       }
     });
 
@@ -59,93 +61,193 @@ class RecipesList extends StatelessWidget {
   }
 
   Widget cardBox(RecipeDTO recipe, BuildContext context) {
-    return InkWell(
+    return Padding(
+      padding: EdgeInsets.only(top: 5, bottom: 5),
+      child: InkWell(
         onTap: () =>
             {Navigator.pushNamed(context, '/recipes', arguments: recipe)},
         highlightColor: Colors.transparent,
         splashColor: Colors.transparent,
         child: Container(
-            alignment: Alignment.centerLeft,
-            margin: EdgeInsets.fromLTRB(10, 2, 10, 2),
-            child: Stack(alignment: Alignment.centerLeft, children: <Widget>[
+          alignment: Alignment.centerLeft,
+          margin: EdgeInsets.fromLTRB(10, 2, 10, 2),
+          child: Stack(
+            alignment: Alignment.center,
+            children: <Widget>[
               Container(
-                  margin: EdgeInsets.only(left: 55, top: 60),
-                  padding: EdgeInsets.all(3),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.lightGreen, width: 1),
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10))),
-                  child: Text(
-                    "${recipe.carbohydrate == 0 ? '-' : recipe.carbohydrate} car",
-                    style: TextStyle(color: Colors.black),
-                    textAlign: TextAlign.start,
-                  )),
-              Container(
-                alignment: Alignment.bottomRight,
-                child: Container(
-                    margin: EdgeInsets.only(right: 20, top: 60),
-                    padding: EdgeInsets.all(3),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.orange, width: 1),
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(10),
-                            bottomRight: Radius.circular(10))),
-                    child: Text(
-                      "${recipe.proteins == 0 ? '-' : recipe.proteins} pro",
-                      style: TextStyle(color: Colors.black),
-                      textAlign: TextAlign.start,
-                    )),
-              ),
-              Container(
-                  margin: EdgeInsets.only(left: 30),
-                  padding: EdgeInsets.only(right: 10),
-                  alignment: Alignment.centerLeft,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.blue, width: 1),
-                      borderRadius: BorderRadius.circular(15.0)),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Padding(
-                            padding:
-                                EdgeInsets.only(left: 40, top: 10, bottom: 10),
-                            child: Text(
-                              recipe.title,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 18),
-                              textAlign: TextAlign.start,
-                            )),
-                      ])),
-              Container(
-                  width: 60,
-                  decoration: BoxDecoration(
+                margin: EdgeInsets.only(right: 30),
+                alignment: Alignment.centerLeft,
+                decoration: BoxDecoration(
                     color: Colors.white,
-                    border: Border.all(color: Colors.red),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Column(
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.only(top: 5),
-                        child: Image.asset(
-                          'assets/icons/fire.png',
-                          color: Colors.orange,
-                          width: 25,
+                    borderRadius: BorderRadius.circular(15.0)),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    ClipRRect(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(15),
+                          bottomLeft: Radius.circular(15)),
+                      child: Image.asset(
+                        'assets/icons/grey_image.png',
+                        width: 110,
+                        height: 110,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Flexible(
+                      child: Container(
+                        height: 110,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(10, 10, 50, 5),
+                              child: Text(
+                                recipe.title,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 18),
+                                textAlign: TextAlign.start,
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 10, right: 40),
+                              child: Text(
+                                recipe.description,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style:
+                                    TextStyle(color: Colors.grey, fontSize: 15),
+                                textAlign: TextAlign.start,
+                              ),
+                            ),
+                            Expanded(
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    left: 10, top: 5, bottom: 10),
+                                child: Container(
+                                  alignment: Alignment(1.0, 1.0),
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      Icon(Icons.timer),
+                                      Text(
+                                        recipe.time,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 15),
+                                        textAlign: TextAlign.start,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      Padding(
-                          padding: EdgeInsets.only(bottom: 5),
-                          child: Text(recipe.calories == 0
-                              ? '-'
-                              : recipe.calories.toString()))
-                    ],
-                  ))
-            ])));
+                    ),
+                  ],
+                ),
+              ),
+              Column(
+                children: [
+                  Container(
+                    alignment: Alignment.centerRight,
+                    margin: EdgeInsets.only(top: 5, bottom: 5),
+                    child: Container(
+                        alignment: Alignment.center,
+                        width: 80,
+                        padding: EdgeInsets.all(2),
+                        decoration: BoxDecoration(
+                            color: Color(0xFFC58DFD),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15))),
+                        child: Text(
+                          "${recipe.quantity == 0 ? '-' : recipe.quantity} ${S.of(context).rations}",
+                          style: TextStyle(color: Colors.white, fontSize: 13),
+                          textAlign: TextAlign.start,
+                        )),
+                  ),
+                  Container(
+                    alignment: Alignment.centerRight,
+                    margin: EdgeInsets.only(top: 5, bottom: 5),
+                    child: Container(
+                      alignment: Alignment.center,
+                      width: 80,
+                      padding: EdgeInsets.all(2),
+                      decoration: BoxDecoration(
+                          color: Color(0xFFF9E853),
+                          borderRadius: BorderRadius.all(Radius.circular(15))),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: setStars(3.4),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.centerRight,
+                    margin: EdgeInsets.only(top: 5, bottom: 5),
+                    child: Container(
+                        alignment: Alignment.center,
+                        width: 80,
+                        padding: EdgeInsets.all(2),
+                        decoration: BoxDecoration(
+                            color: getDifficultyColor(recipe.difficulty),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15))),
+                        child: Text(
+                          getDifficulty(recipe.difficulty, context),
+                          style: TextStyle(color: Colors.white, fontSize: 13),
+                          textAlign: TextAlign.start,
+                        )),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Color getDifficultyColor(String difficulty) {
+    if (difficulty == 'EASY') {
+      return Color(0xFF45BBED);
+    } else if (difficulty == "AVERAGE") {
+      return Color(0xFF7EDF94);
+    } else {
+      return Color(0xFFFF5F5F);
+    }
+  }
+
+  String getDifficulty(String difficulty, BuildContext context) {
+    if (difficulty == 'EASY') {
+      return S.of(context).easy;
+    } else if (difficulty == "AVERAGE") {
+      return S.of(context).average;
+    } else {
+      return S.of(context).hard;
+    }
+  }
+
+  List<Widget> setStars(double rating) {
+    List<Widget> result = [];
+    var maxStars = rating.ceil();
+
+    for (var i = 0; i < 5; i++) {
+      if (i == maxStars - 1 && rating < maxStars) {
+        result.add(Icon(Icons.star_half, size: 14, color: Colors.white));
+      } else if (i < maxStars) {
+        result.add(Icon(Icons.star, size: 14, color: Colors.white));
+      } else {
+        result.add(Icon(Icons.star_outline, size: 14, color: Colors.white));
+      }
+    }
+
+    return result;
   }
 }

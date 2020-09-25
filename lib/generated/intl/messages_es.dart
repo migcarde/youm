@@ -19,6 +19,10 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'es';
 
+  static m0(list) => "${list} está vacía";
+
+  static m1(object) => "${object} no encontrado";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "add" : MessageLookupByLibrary.simpleMessage("Añadir"),
@@ -34,13 +38,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "diet" : MessageLookupByLibrary.simpleMessage("Dieta"),
     "difficulty" : MessageLookupByLibrary.simpleMessage("Dificultad"),
     "easy" : MessageLookupByLibrary.simpleMessage("Fácil"),
+    "emptyException" : m0,
     "fat" : MessageLookupByLibrary.simpleMessage("Grasa"),
     "favorites" : MessageLookupByLibrary.simpleMessage("Favoritos"),
     "field_required" : MessageLookupByLibrary.simpleMessage("Este campo es obligatorio"),
+    "formatException" : MessageLookupByLibrary.simpleMessage("La petición no se ha realizado correctamente. Por favor, revise los datos enviados"),
     "general_data" : MessageLookupByLibrary.simpleMessage("Datos generales"),
     "hard" : MessageLookupByLibrary.simpleMessage("Difícil"),
     "ingredients" : MessageLookupByLibrary.simpleMessage("Ingredientes"),
     "kg" : MessageLookupByLibrary.simpleMessage("kg"),
+    "notFoundException" : m1,
     "nutritional_info" : MessageLookupByLibrary.simpleMessage("Información nutricional"),
     "picture" : MessageLookupByLibrary.simpleMessage("Imagen"),
     "preparation" : MessageLookupByLibrary.simpleMessage("Preparación"),
@@ -48,8 +55,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "proteins" : MessageLookupByLibrary.simpleMessage("Proteinas"),
     "quantity" : MessageLookupByLibrary.simpleMessage("Cantidad"),
     "ration" : MessageLookupByLibrary.simpleMessage("Raciones"),
+    "rations" : MessageLookupByLibrary.simpleMessage("Raciones"),
     "recipes" : MessageLookupByLibrary.simpleMessage("Recetas"),
     "shopping_list" : MessageLookupByLibrary.simpleMessage("Carro"),
+    "socketException" : MessageLookupByLibrary.simpleMessage("No tienes conexión a internet en este momento. Por favor, inténtelo más tarde"),
     "step" : MessageLookupByLibrary.simpleMessage("Paso"),
     "steps" : MessageLookupByLibrary.simpleMessage("Pasos"),
     "tags" : MessageLookupByLibrary.simpleMessage("Etiquetas"),
@@ -57,6 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "title_validator" : MessageLookupByLibrary.simpleMessage("El título no puede estar vacío"),
     "unit" : MessageLookupByLibrary.simpleMessage("Unidad"),
     "unit_required" : MessageLookupByLibrary.simpleMessage("Seleccione una unidad"),
+    "unknowException" : MessageLookupByLibrary.simpleMessage("Ha ocurrido un error inesperado. Por favor, inténtelo más tarde"),
     "wall" : MessageLookupByLibrary.simpleMessage("Muro")
   };
 }

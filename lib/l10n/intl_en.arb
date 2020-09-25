@@ -19,9 +19,6 @@
   "difficulty": "Difficulty",
   "preparation_time": "Preparation time",
   "tags": "Tags",
-  "easy": "Easy",
-  "average": "Average",
-  "hard": "Hard",
   "title_validator": "Title cannot be empty",
   "quantity": "Quantity",
   "unit": "Unit",
@@ -35,5 +32,14 @@
   "step": "Step",
   "field_required": "This field is required",
   "unit_required": "Select an unit",
-  "kg": "Kg"
+  "kg": "Kg",
+  "easy": "Easy",
+  "average": "Average",
+  "hard": "Hard",
+  "rations": "Rations",
+  "socketException": "You don't have internet o this moment. Please, try again later",
+  "notFoundException": "{object} not found",
+  "emptyException": "{list} is empty",
+  "unknowException": "An unexcepted error was ocurred. Please, try again later",
+  "formatException": "The request has not been filled correctly. Please, check data"
 }
