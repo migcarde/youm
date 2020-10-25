@@ -25,8 +25,12 @@ class RecipesBloc {
   }
 
   createRecipe(RecipeForCreationDTO recipeForCreation) async {
-    RecipeDTO result = await repository.postRecipe(recipeForCreation);
-    recipe.sink.add(result);
+    try {
+      RecipeDTO result = await repository.postRecipe(recipeForCreation);
+      recipe.sink.add(result);
+    } catch (e) {
+      recipe.sink.addError(e);
+    }
   }
 
   dispose() {

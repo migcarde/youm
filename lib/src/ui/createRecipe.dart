@@ -332,6 +332,8 @@ class _CreateRecipeState extends State<CreateRecipe> {
                                                     return S
                                                         .of(context)
                                                         .unit_required;
+                                                  } else {
+                                                    return null;
                                                   }
                                                 },
                                                 keyboardType:

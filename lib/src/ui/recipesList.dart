@@ -17,6 +17,11 @@ class RecipesList extends StatelessWidget {
         if (snapshot.hasData) {
           var data = snapshot.data as PagedList<RecipeDTO>;
           if (recipes == null) {
+            if (data.items.length == 0) {
+              var recipesText = S.of(context).recipes;
+              return Center(
+                  child: Text(S.of(context).notFoundException(recipesText)));
+            }
             recipes = data;
           } else {
             recipes.items.addAll(data.items);
@@ -244,7 +249,7 @@ class RecipesList extends StatelessWidget {
       } else if (i < maxStars) {
         result.add(Icon(Icons.star, size: 14, color: Colors.white));
       } else {
-        result.add(Icon(Icons.star_outline, size: 14, color: Colors.white));
+        result.add(Icon(Icons.star_border, size: 14, color: Colors.white));
       }
     }
 

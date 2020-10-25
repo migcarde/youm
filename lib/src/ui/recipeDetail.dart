@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:youm/generated/l10n.dart';
 import 'package:youm/src/common/ui/ListBuilder.dart';
-import 'package:youm/src/models/recipeModel.dart';
+import 'package:youm/src/models/DTO/recipeDTO.dart';
 
 class RecipeDetail extends StatefulWidget {
   @override
@@ -14,7 +14,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
 
   @override
   Widget build(BuildContext context) {
-    final RecipeModel recipe = ModalRoute.of(context).settings.arguments;
+    final RecipeDTO recipe = ModalRoute.of(context).settings.arguments;
 
     return DefaultTabController(
         length: 2,
@@ -36,8 +36,8 @@ class _RecipeDetailState extends State<RecipeDetail> {
                 ])),
             body: TabBarView(
               children: <Widget>[
-                buildListString(recipe.directions),
-                buildListString(recipe.ingredients),
+                buildListString(recipe.tags.map((e) => e.name).toList()),
+                buildListString(recipe.ingredients.map((e) => e.name).toList()),
               ],
             )));
   }

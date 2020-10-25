@@ -56,7 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "quantity" : MessageLookupByLibrary.simpleMessage("Quantity"),
     "ration" : MessageLookupByLibrary.simpleMessage("Ration"),
     "rations" : MessageLookupByLibrary.simpleMessage("Rations"),
-    "recipes" : MessageLookupByLibrary.simpleMessage("Recetas"),
+    "recipes" : MessageLookupByLibrary.simpleMessage("Recipes"),
     "shopping_list" : MessageLookupByLibrary.simpleMessage("Cart"),
     "socketException" : MessageLookupByLibrary.simpleMessage("You don\'t have internet o this moment. Please, try again later"),
     "step" : MessageLookupByLibrary.simpleMessage("Step"),
