@@ -6,9 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:youm/generated/l10n.dart';
 import 'package:youm/src/blocs/recipesBloc.dart';
-import 'package:youm/src/models/DTO/creation/ingredientForCreationDTO.dart';
 import 'package:youm/src/models/DTO/creation/recipeForCreationDTO.dart';
-import 'package:youm/src/models/DTO/creation/tagForCreationDTO.dart';
+import 'package:youm/src/ui/dialogs/addIngredientDialog.dart';
 
 class CreateRecipe extends StatefulWidget {
   @override
@@ -18,13 +17,11 @@ class CreateRecipe extends StatefulWidget {
 class _CreateRecipeState extends State<CreateRecipe> {
   final _generalFormKey = GlobalKey<FormState>();
   final _detailsFormKey = GlobalKey<FormState>();
-  final _popKey = GlobalKey<FormState>();
   int _step = 0;
   bool imageError = false;
   bool ingredientError = false;
   bool stepsError = false;
   PickedFile _image;
-  var _ingredients = List<String>();
   final picker = ImagePicker();
   RecipeForCreationDTO _recipe = RecipeForCreationDTO.create();
   var stepController = TextEditingController();
@@ -284,130 +281,8 @@ class _CreateRecipeState extends State<CreateRecipe> {
                         onPressed: () => showDialog(
                           context: context,
                           builder: (context) {
-                            var ingredient = IngredientForCreationDTO.create();
-                            bool unitError = false;
-                            return AlertDialog(
-                              title: Text(S.of(context).add_ingredient),
-                              content: Form(
-                                key: _popKey,
-                                child: Wrap(
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(top: 10),
-                                      child: TextFormField(
-                                        validator: (value) => value.length == 0
-                                            ? S.of(context).field_required
-                                            : null,
-                                        decoration: InputDecoration(
-                                          labelText: S.of(context).title,
-                                          border: OutlineInputBorder(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(5),
-                                            ),
-                                          ),
-                                        ),
-                                        onSaved: (value) {
-                                          if (value.length > 0) {
-                                            ingredient.name = value;
-                                          }
-                                        },
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.only(top: 10),
-                                      child: Row(
-                                        children: [
-                                          Flexible(
-                                            child: Padding(
-                                              padding:
-                                                  EdgeInsets.only(right: 5),
-                                              child: TextFormField(
-                                                validator: (value) {
-                                                  if (value.length == 0) {
-                                                    return S
-                                                        .of(context)
-                                                        .field_required;
-                                                  } else if (ingredient.unit ==
-                                                      null) {
-                                                    return S
-                                                        .of(context)
-                                                        .unit_required;
-                                                  } else {
-                                                    return null;
-                                                  }
-                                                },
-                                                keyboardType:
-                                                    TextInputType.number,
-                                                inputFormatters: [
-                                                  FilteringTextInputFormatter
-                                                      .digitsOnly,
-                                                ],
-                                                decoration: InputDecoration(
-                                                  labelText:
-                                                      S.of(context).ration,
-                                                  border: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                      Radius.circular(5),
-                                                    ),
-                                                  ),
-                                                ),
-                                                onSaved: (value) {
-                                                  if (value.length > 0) {
-                                                    ingredient.quantity =
-                                                        double.parse(value);
-                                                  }
-                                                },
-                                              ),
-                                            ),
-                                          ),
-                                          Flexible(
-                                            child: Padding(
-                                              padding: EdgeInsets.only(left: 5),
-                                              child: DropdownButton(
-                                                underline: SizedBox(),
-                                                value: ingredient.unit,
-                                                items: [
-                                                  DropdownMenuItem(
-                                                    child: Text(
-                                                        S.of(context).unit),
-                                                    value: null,
-                                                  ),
-                                                  DropdownMenuItem(
-                                                    child:
-                                                        Text(S.of(context).kg),
-                                                    value: 'KG',
-                                                  ),
-                                                ],
-                                                onChanged: (value) => setState(
-                                                    () => ingredient.unit =
-                                                        value),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              actions: [
-                                MaterialButton(
-                                  onPressed: () {
-                                    _popKey.currentState.save();
-                                    unitError = ingredient.unit == null;
-                                    if (_popKey.currentState.validate() &&
-                                        !unitError) {
-                                      ingredientError = false;
-                                      _recipe.ingredients.insert(0, ingredient);
-                                      Navigator.of(context).pop();
-                                    }
-                                    setState(() {});
-                                  },
-                                  child: Text(S.of(context).add),
-                                )
-                              ],
-                            );
+                            return AddIngredientDialog((ingredient) => setState(
+                                () => _recipe.ingredients.add(ingredient)));
                           },
                         ),
                         label: Text(S.of(context).add_ingredient),
@@ -434,7 +309,8 @@ class _CreateRecipeState extends State<CreateRecipe> {
                                     deleteIcon: Icon(Icons.close),
                                     padding: EdgeInsets.only(right: 5, left: 5),
                                     onDeleted: () => setState(
-                                      () => _ingredients.remove(ingredient),
+                                      () => _recipe.ingredients
+                                          .remove(ingredient),
                                     ),
                                   ),
                                 ),
